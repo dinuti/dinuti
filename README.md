@@ -3,11 +3,11 @@ projet de gestion du travailleur isolé
 
 ## Technical requirements
 
-* Linting
-* Unit testing via Travis CI
-* Docker images
-* Doc generation from code
-* Swagger API
+* Linting [medium]
+* Unit testing via Travis CI [high]
+* Docker images [high]
+* Doc generation from code [medium]
+* Swagger API [low]
 
 ## Architecture requirements
 
