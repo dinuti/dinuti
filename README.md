@@ -9,7 +9,10 @@ projet de gestion du travailleur isolé
 * Doc generation from code [medium]
 * Swagger API [low]
 
-## Architecture requirements
+## Architecture requirements 
 
 * Backend must be stateless and scalable
 * Frontend <-> Backend communication must be API based to allow multiple frontends (web desktop, mobile)
+
+## Languages
+
