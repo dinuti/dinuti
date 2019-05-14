@@ -13,3 +13,5 @@ script:
 - cd front
 - ng lint
 - ng serve
+notifications:
+ slack: dinuti:3LUFGSdQUxe6Qxv9JiXLpuB9
