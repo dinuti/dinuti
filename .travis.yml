@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "9"
+  - "10.15.3"
 dist: trusty
 sudo: required
 branches:
@@ -8,7 +8,8 @@ branches:
   - master
 before_script:
   - npm install -g @angular/cli
+  - npm i
 script:
 - cd front
 - ng lint
-- ng build --prod --base-href https://github.com/dinuti/dinuti
+- ng serve
