@@ -7,9 +7,9 @@ branches:
   only:
   - master
 before_script:
-  - npm i -g @angular/cli@7.3.9
-  - npm i -g tslint
-  - npm i @angular-devkit/build-angular
+  - npm i -g yarn
+  - yarn global add -g @angular/cli
+  - yarn
 script:
 - cd front
 - ng update
