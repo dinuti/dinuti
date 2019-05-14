@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "10.11.0"
+  - "10.15.3"
 dist: trusty
 sudo: required
 branches:
@@ -8,8 +8,15 @@ branches:
   - master
 before_script:
   - npm install -g @angular/cli
+  - npm i
   - npm i @angular-devkit/build-angular
 script:
 - cd front
 - ng lint
 - ng build --prod
+script:
+- cd front
+- ng lint
+- ng serve
+notifications:
+ slack: dinuti:3LUFGSdQUxe6Qxv9JiXLpuB9
