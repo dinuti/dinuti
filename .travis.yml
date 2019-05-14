@@ -7,10 +7,12 @@ branches:
   only:
   - master
 before_script:
-  - npm install -g @angular/cli@7.3.9
+  - npm i -g @angular/cli@7.3.9
   - npm i -g tslint
+  - npm i @angular-devkit/build-angular
 script:
 - cd front
+- ng update
 - ng lint
 - ng build --prod
 script:
