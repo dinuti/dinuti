@@ -1,5 +1,5 @@
 # This defines our starting point
-FROM node:8
+FROM node:10.15.3
 
 RUN mkdir /usr/src/app 
  
@@ -10,4 +10,3 @@ RUN npm install -g @angular/cli
 COPY . .
 
 RUN npm install
-RUN npm rebuild node-sass

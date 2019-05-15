@@ -5,7 +5,8 @@ services: # Here we define our service(s)
       build: ./front # Location of our Dockerfile
       volumes: # Volume binding
         - './front:/usr/src/app'
+        - '/usr/src/app/node_modules/'
       ports: 
         - '4200:4200' # Port mapping
-      command: > 
+      command: >
         bash -c "ng serve --host 0.0.0.0 --port 4200"
