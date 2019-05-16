@@ -16,3 +16,10 @@ projet de gestion du travailleur isolé
 
 ## Languages
 
+## Docker
+
+* Run
+```docker-compose up --build -d```
+
+* Stop
+```docker-compose stop```
