@@ -22,6 +22,7 @@
     "nodemon": "^1.19.0"
   },
   "dependencies": {
+    "@types/socket.io": "^2.1.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
@@ -32,6 +33,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "slugify": "^1.2.1",
+    "socket.io": "^2.2.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.5.2"
   }

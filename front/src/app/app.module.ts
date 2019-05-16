@@ -8,6 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormLocationComponent } from './components/form-location/form-location.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FormsModule } from '@angular/forms';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SocketIoModule.forRoot(config),
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
