@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fb3da424-eedc-4fb2-b316-cf18f3310b85",
+		"_postman_id": "5a45678a-5a44-4c1d-94af-3a71523342f6",
 		"name": "dinuti",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -51,6 +51,59 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\", \"username\":\"Kevin\", \"firstName\": \"Kevin\", \"lastName\": \"B\"}}"
+								},
+								"url": {
+									"raw": "{{apiUrl}}/users",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Marlene",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3f554961-8416-4a27-a7e5-e0691f523668",
+										"exec": [
+											"if (!(environment.isIntegrationTest)) {",
+											"var responseJSON = JSON.parse(responseBody);",
+											"",
+											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
+											"",
+											"var user = responseJSON.user || {};",
+											"",
+											"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
+											"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
+											"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
+											"}",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"user\":{\"email\":\"marly@gmail.com\", \"password\":\"marlene\", \"username\":\"marlene\", \"firstName\": \"marlene\", \"lastName\": \"A\"}}"
 								},
 								"url": {
 									"raw": "{{apiUrl}}/users",
@@ -156,7 +209,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"kevinn@gmail.com\", \"password\":\"Kevin\", \"username\":\"Kevin\", \"firstName\": \"Kevin\", \"lastName\": \"Boisgontier\"}}"
+									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\", \"username\":\"florian\", \"firstName\": \"florian\", \"lastName\": \"Blay\"}}"
 								},
 								"url": {
 									"raw": "{{apiUrl}}/users",
@@ -219,6 +272,64 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\"}}"
+								},
+								"url": {
+									"raw": "{{apiUrl}}/users/login",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login Marlene and Remember Token Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f9cf791f-3d68-4cd3-bdc3-0a5e9cba9e69",
+										"exec": [
+											"var responseJSON = JSON.parse(responseBody);",
+											"",
+											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
+											"",
+											"var user = responseJSON.user || {};",
+											"",
+											"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
+											"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
+											"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
+											"",
+											"if(tests['User has \"token\" property']){",
+											"    postman.setEnvironmentVariable('token', user.token);",
+											"}",
+											"",
+											"tests['Environment variable \"token\" has been set'] = environment.token === user.token;",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"user\":{\"email\":\"marly@gmail.com\", \"password\":\"marlene\"}}"
 								},
 								"url": {
 									"raw": "{{apiUrl}}/users/login",
@@ -395,6 +506,10 @@
 								"value": "Token {{token}}"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{apiUrl}}/user",
 							"host": [
@@ -512,6 +627,10 @@
 								"value": "Token {{token}}"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{apiUrl}}/profiles/florian",
 							"host": [
