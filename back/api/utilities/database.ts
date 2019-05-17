@@ -7,9 +7,7 @@ import * as Bluebird from 'bluebird';
 (mongoose as any).Promise = Bluebird;
 
 
-export function connectToMongoDB() {
-
-	const dbUri = 'mongodb://localhost:27017/dinuti';
+export function connectToMongoDB(dbUri: string) {
 
 	mongoose.connect(dbUri, {
 		useMongoClient: true

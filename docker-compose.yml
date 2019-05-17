@@ -1,12 +1,31 @@
-version: '3.5' # We use version 3.5 syntax
-services: # Here we define our service(s)
-    angular-service: # The name of the service
-      container_name: angularcontainer  # Container name
-      build: ./front # Location of our Dockerfile
-      volumes: # Volume binding
-        - './front:/usr/src/app'
-        - '/usr/src/app/node_modules/'
-      ports: 
-        - '4200:4200' # Port mapping
-      command: >
-        bash -c "ng serve --host 0.0.0.0 --port 4200"
+version: '3.5'
+services:
+  front-service:
+    container_name: front-container
+    build: ./front
+    volumes:
+      - './front:/usr/src/app'
+      - '/usr/src/app/node_modules/'
+    ports: 
+      - '4200:4200'
+    command: >
+      bash -c 'ng serve --host 0.0.0.0 --port 4200'
+  back-service:
+    container_name: back-container
+    restart: always
+    build: ./back
+    ports:
+      - '3000:3000'
+    links:
+      - mongo-service
+    depends_on:
+      - mongo-service
+    command: >
+      bash -c 'npm run docker'
+  mongo-service:
+    container_name: mongo-container
+    image: mongo
+    # volumes:
+    #   - ./back/dinuti:/data/db/
+    ports:
+      - '27017:27017'

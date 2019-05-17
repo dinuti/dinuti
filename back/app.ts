@@ -9,13 +9,14 @@ import './api/utilities/passport';
 import * as session from 'express-session';
 import * as socketio from "socket.io";
 
-
 const app: Application = express();
 const http = require("http").Server(app);
 http.listen(4000);
 const io = require("socket.io")(http);
 
-connectToMongoDB();
+const dbUri: string = process.argv[2] ? process.argv[2] : '';
+
+connectToMongoDB(dbUri);
 
 app.use(bodyParser.json());
 app.use(session({ secret: 'dinuti', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
