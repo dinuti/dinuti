@@ -15,6 +15,9 @@
 # Design Files
 *.sketch
 
-#System Files
+# System Files
 .DS_Store
 Thumbs.db
+
+# mongo
+/dinuti

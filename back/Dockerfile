@@ -14,6 +14,3 @@ COPY . /usr/src/app
 
 ## tell the port number the container should expose
 EXPOSE 3000
-
-## run the application
-CMD ["npm", "run", "dev"]

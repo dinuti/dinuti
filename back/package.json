@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "app.ts",
   "scripts": {
-    "dev": "nodemon --exec \"ts-node\" ./app.ts"
+    "dev": "nodemon --exec \"ts-node\" ./app.ts mongodb://localhost:27017/dinuti",
+    "docker": "nodemon --exec \"ts-node\" ./app.ts mongodb://mongo-service:27017/dinuti"
   },
   "bugs": {
     "url": "https://"
