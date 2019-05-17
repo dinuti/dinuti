@@ -7,9 +7,7 @@ import { ProfileRequest } from '../interfaces/requests-interface';
 const router: Router = Router();
 
 
-/**
- * PARAM :username
- */
+
 router.param('username', (req: ProfileRequest, res: Response, next: NextFunction, username: string) => {
 	User.findOne({username}).then( (user: IUserModel) => {
 			req.profile = user;
@@ -19,8 +17,15 @@ router.param('username', (req: ProfileRequest, res: Response, next: NextFunction
 
 
 /**
- * GET /api/profiles/:username
+ * @api {get} /profiles/:username
+ * @apiName Get profiles
+ * @apiDescription Get the profile of the username
+ * @apiGroup Profiles
+ * @apiSuccess {Profile} Profile Profile of the Username 
+ * @apiError (401) {String} Error Username not found
+ *   
  */
+
 router.get('/:username', authentication.optional,	(req: ProfileRequest, res: Response, next: NextFunction) => {
 	if (req.payload) {
 		User.findById(req.payload.id).then( (user: IUserModel) => {

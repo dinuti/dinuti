@@ -6,9 +6,17 @@ import { User } from '../models/user-model';
 
 const router: Router = Router();
 
-/**
- * POST /api/location
+
+ /**
+ * @api {post} /location/
+ * @apiName Post Location
+ * @apiDescription Add the Location of the Session
+ * @apiGroup Location
+ * @apiSuccess {Location} Location Location of the Session 
+ * @apiError (401) {String} Error Error Unauthorized or Error Param not defined 
+ *   
  */
+
 router.post('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 
 	const location: ILocationModel = new Location();

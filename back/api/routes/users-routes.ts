@@ -7,9 +7,11 @@ const router: Router = Router();
 
 
 /**
- * @api {post} /user/
+ * @api {post} /users/
  * @apiName Create new user
  * @apiGroup Users
+ * @apiSuccess {Users} Users The user has been created 
+ * @apiError (401) {String} Error Username not found
  */
 router.post('/', (req: Request, res: Response, next: NextFunction) => {
 
@@ -31,6 +33,8 @@ router.post('/', (req: Request, res: Response, next: NextFunction) => {
  * @api {post} /users/login
  * @apiName Log user
  * @apiGroup Users
+ * @apiSuccess {Users} Users The user is logged in
+ * @apiError (401) {String} Error Failed authentication
  */
 router.post('/login', (req: Request, res: Response, next: NextFunction) => {
 
