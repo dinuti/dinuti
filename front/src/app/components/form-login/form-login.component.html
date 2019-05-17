@@ -1,9 +1,9 @@
-<div class="container">
-  <mat-form-field>
-    <input matInput placeholder="Username" [(ngModel)]="user.username">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Password" [(ngModel)]="user.password">
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="connect()">Connect</button>
-</div>
+<mat-form-field>
+  <input matInput placeholder="Username" [(ngModel)]="user.username">
+</mat-form-field>
+<br>
+<mat-form-field>
+  <input matInput placeholder="Password" [(ngModel)]="user.password">
+</mat-form-field>
+<br>
+<button mat-raised-button color="primary" (click)="connect()">Connect</button>
