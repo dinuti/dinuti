@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public socket: Socket) { }
 
   ngOnInit() {
+    this.socket.emit('message', 'bonjour');
+    this.socket.on('message', (ev: any) => {
+      console.log(ev);
+    });
   }
 
 }
