@@ -8,7 +8,9 @@ const router: Router = Router();
 
 
 /**
- * GET /api/user
+ * @api {get} /user/
+ * @apiName GetUser
+ * @apiGroup User
  */
 router.get('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 

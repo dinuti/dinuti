@@ -20,6 +20,7 @@ connectToMongoDB();
 app.use(bodyParser.json());
 app.use(session({ secret: 'dinuti', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
 app.use('/api', MainRouter);
+app.use('/doc', express.static('./apidoc'));
 
 loadErrorHandlers(app);
 

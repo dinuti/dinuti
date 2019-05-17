@@ -7,7 +7,9 @@ const router: Router = Router();
 
 
 /**
- * POST /api/users
+ * @api {post} /user/
+ * @apiName Create new user
+ * @apiGroup Users
  */
 router.post('/', (req: Request, res: Response, next: NextFunction) => {
 
@@ -26,7 +28,9 @@ router.post('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 /**
- * POST /api/users/login
+ * @api {post} /users/login
+ * @apiName Log user
+ * @apiGroup Users
  */
 router.post('/login', (req: Request, res: Response, next: NextFunction) => {
 
