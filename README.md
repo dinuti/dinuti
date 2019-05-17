@@ -19,7 +19,7 @@ projet de gestion du travailleur isolé
 ## Docker
 
 * Run
-```docker-compose up --build -d```
+```docker-compose up -d```
 
 * Stop
 ```docker-compose stop```
