@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environment/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
-@Injectable()
-export class AuthProvider {
+@Injectable({ providedIn: 'root' })
+export class AuthService {
 
   private baseUrl = `${environment.server}`;
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, public jwtHelper: JwtHelperService) {}
 
   headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.getToken());
 
@@ -30,10 +31,9 @@ export class AuthProvider {
     return new Promise((resolve, reject) => {
       this.http.post(this.baseUrl + '/users/login', { user: credentials })
         .subscribe(res => {
-          const data = res;
-          const token = data['user']['token'];
+          const data: any = res;
+          const token = data.user.token;
           localStorage.setItem('token', token);
-
           resolve(res);
         }, (err) => {
           reject(err);
@@ -43,6 +43,10 @@ export class AuthProvider {
 
   }
 
+  public isAuthenticated(): boolean {
+    return !this.jwtHelper.isTokenExpired(this.getToken());
+  }
+
   getToken() {
     return localStorage.getItem('token');
   }
@@ -50,4 +54,5 @@ export class AuthProvider {
   logout() {
     localStorage.removeItem('token');
   }
+
 }

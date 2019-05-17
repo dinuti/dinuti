@@ -12,6 +12,8 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { FormSigninComponent } from './components/form-signin/form-signin.component';
 import { LoginComponent } from './pages/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 
 const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
 
@@ -28,6 +30,14 @@ const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
     BrowserModule,
     AppRoutingModule,
     SocketIoModule.forRoot(config),
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        }
+      }
+    }),
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,

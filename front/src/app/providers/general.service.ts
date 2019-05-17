@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthProvider } from './auth.service';
+import { AuthService } from './auth.service';
 
-@Injectable()
-export class GeneralProvider {
+@Injectable({ providedIn: 'root' })
+export class GeneralService {
 
   headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.authProvider.getToken());
 
-  constructor(public http: HttpClient, private authProvider: AuthProvider) {
+  constructor(public http: HttpClient, private authProvider: AuthService) {
     console.log('Hello GeneralProvider Provider');
     this.headers.set('Authorization', 'Bearer ' + authProvider.getToken());
   }
