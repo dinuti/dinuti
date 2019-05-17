@@ -9,6 +9,9 @@ import { FormLocationComponent } from './components/form-location/form-location.
 import { HomeComponent } from './pages/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { FormLoginComponent } from './components/form-login/form-login.component';
+import { FormSigninComponent } from './components/form-signin/form-signin.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
 
@@ -16,7 +19,10 @@ const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
   declarations: [
     AppComponent,
     FormLocationComponent,
-    HomeComponent
+    HomeComponent,
+    FormLoginComponent,
+    FormSigninComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
