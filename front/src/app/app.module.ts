@@ -13,9 +13,17 @@ import { FormLoginComponent } from './components/form-login/form-login.component
 import { FormSigninComponent } from './components/form-signin/form-signin.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
+
+export function jwtOptionsFactory() {
+  return {
+    tokenGetter: () => {
+      return localStorage.getItem('token');
+    }
+  };
+}
 
 @NgModule({
   declarations: [
@@ -32,10 +40,9 @@ const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
     SocketIoModule.forRoot(config),
     HttpClientModule,
     JwtModule.forRoot({
-      config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        }
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory
       }
     }),
     MatToolbarModule,
