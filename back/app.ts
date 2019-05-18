@@ -8,6 +8,7 @@ import { loadErrorHandlers } from './api/utilities/error-handling';
 import './api/utilities/passport';
 import * as session from 'express-session';
 import * as socketio from "socket.io";
+import * as cors from "cors";
 
 const app: Application = express();
 const http = require("http").Server(app);
@@ -19,6 +20,7 @@ const dbUri: string = process.argv[2] ? process.argv[2] : '';
 connectToMongoDB(dbUri);
 
 app.use(bodyParser.json());
+app.use(cors());
 app.use(session({ secret: 'dinuti', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
 app.use('/api', MainRouter);
 

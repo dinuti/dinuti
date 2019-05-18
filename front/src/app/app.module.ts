@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatGridListModule } from '@angular/material';
+import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatGridListModule, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormLocationComponent } from './components/form-location/form-location.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -42,6 +42,7 @@ const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     FormsModule,
     BrowserAnimationsModule,
     MatGridListModule

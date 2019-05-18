@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user';
+import { AuthService } from 'src/app/providers/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-login',
@@ -10,13 +12,21 @@ export class FormLoginComponent implements OnInit {
 
   user: User = new User();
 
-  constructor() { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
   connect(): void {
-    console.log(this.user);
+    const credentials = {
+      email: this.user.username,
+      password: this.user.password
+    };
+    this.auth.login(credentials).then((res: any) => {
+      if (res.user.token) {
+        this.router.navigateByUrl('/');
+      }
+    });
   }
 
 }
