@@ -27,13 +27,19 @@ app.use('/api', MainRouter);
 loadErrorHandlers(app);
 
 io.on("connection", function(socket: any) {
-	console.log("a user connected");
-	socket.on("message", message => {
-		console.log("Message Received: " + message);
-		io.emit("message", { type: "new-message", text: message });
+	log(`${Object.keys(io.sockets.connected).length} user connected`);
+	socket.on("auth", res => {
+		log(`${res.user.email} est connecté`);
+		socket.sessionid = res.user.email
+		io.emit("message", { type: "new-message", text: res });
 	});
+	socket.on("disconnect", () => log(`closed connection ${socket.sessionid}`))
 });
 
 const server = app.listen( 3000, () => {
 	console.log('Listening on port ' + server.address().port);
 });
+
+function log(obj: any): void {
+	console.log('\x1b[42m%s\x1b[0m', obj)
+};

@@ -5,11 +5,10 @@ import { AuthService } from './auth.service';
 @Injectable({ providedIn: 'root' })
 export class GeneralService {
 
-  headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.authProvider.getToken());
+  headers = new HttpHeaders().set('Authorization', 'Token ' + this.authProvider.getToken());
 
   constructor(public http: HttpClient, private authProvider: AuthService) {
-    console.log('Hello GeneralProvider Provider');
-    this.headers.set('Authorization', 'Bearer ' + authProvider.getToken());
+    this.headers.set('Authorization', 'Token ' + authProvider.getToken());
   }
 
   async post(url, json) {
