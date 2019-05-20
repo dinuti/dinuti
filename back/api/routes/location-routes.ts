@@ -6,16 +6,15 @@ import { User } from '../models/user-model';
 
 const router: Router = Router();
 
-
- /**
+/**
  * @api {post} /location/
  * @apiName Post Location
  * @apiDescription Add the Location of the Session
  * @apiGroup Location
- * @apiSuccess {Location} Location Location of the Session 
- * @apiError (401) {String} Error Error Unauthorized or Error Param not defined 
- *   
- */
+ * @apiSuccess {Location} Location Location of the Session
+ * @apiError (401) {String} Error Error Unauthorized or Error Param not defined
+ *
+*/
 
 router.post('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 
@@ -30,10 +29,10 @@ router.post('/', authentication.required, (req: JWTRequest, res: Response, next:
 	}
 	User
 		.findById(req.payload.id)
-		.then(user => {
+		.then((user: any) => {
 			location.author = user;
 			return location.save().then(() => {
-				return res.json({location: location.formatAsLocationJSON(user)});
+				return res.json({ location: location.formatAsLocationJSON(user) });
 			});
 		})
 		.catch(next);

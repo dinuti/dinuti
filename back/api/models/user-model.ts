@@ -5,7 +5,6 @@ import * as jwt from 'jsonwebtoken';
 import { jwtSecret } from '../utilities/authentication';
 import * as crypto from 'crypto';
 
-
 export interface IUserModel extends IUser, Document {
 	token?: string;
 	generateJWT(): string;
@@ -16,16 +15,15 @@ export interface IUserModel extends IUser, Document {
 }
 
 const UserSchema = new Schema({
-	username: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"],
+	username: {type: String, lowercase: true, unique: true, required: [true, 'can\'t be blank'],
 		match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
-	email: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"],
+	email: {type: String, lowercase: true, unique: true, required: [true, 'can\'t be blank'],
 		match: [/\S+@\S+\.\S+/, 'is invalid'], index: true},
 	hash: String,
 	salt: String
-}, {timestamps: true});
+}, { timestamps: true });
 
-
-UserSchema.methods.generateJWT = function(): string {
+UserSchema.methods.generateJWT = function (): string {
 	const today = new Date();
 	const exp = new Date(today);
 	exp.setDate(today.getDate() + 60);
@@ -37,29 +35,25 @@ UserSchema.methods.generateJWT = function(): string {
 	}, jwtSecret);
 };
 
-
-UserSchema.methods.formatAsUserJSON = function() {
+UserSchema.methods.formatAsUserJSON = function () {
 	return {
 		username: this.username,
 		email: this.email,
-		token: this.generateJWT(),
+		token: this.generateJWT()
 	};
 };
 
-
-UserSchema.methods.setPassword = function(password: string): void {
+UserSchema.methods.setPassword = function (password: string): void {
 	this.salt = crypto.randomBytes(16).toString('hex');
 	this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
 };
 
-
-UserSchema.methods.passwordIsValid = function(password: string): boolean {
+UserSchema.methods.passwordIsValid = function (password: string): boolean {
 	const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
 	return hash === this.hash;
 };
 
-
-UserSchema.methods.formatAsProfileJSON = function(user: IUserModel) {
+UserSchema.methods.formatAsProfileJSON = function (user: IUserModel) {
 	return {
 		username: this.username
 	};

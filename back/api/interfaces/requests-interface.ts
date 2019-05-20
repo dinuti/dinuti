@@ -2,7 +2,6 @@
 import { Request } from 'express';
 import { IUserModel } from '../models/user-model';
 
-
 // Add jwt payload details to Express Request
 export interface JWTRequest extends Request {
 	payload: {
@@ -12,7 +11,6 @@ export interface JWTRequest extends Request {
 		iat: number
 	};
 }
-
 
 // Add profile details to JWT Request
 export interface ProfileRequest extends JWTRequest {
