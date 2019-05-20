@@ -12,5 +12,9 @@ RUN npm install
 # Bundle app source
 COPY . /usr/src/app
 
+# Install apidoc
+RUN npm install -g apidoc
+RUN apidoc -i ./api -o apidoc/
+
 ## tell the port number the container should expose
 EXPOSE 3000
