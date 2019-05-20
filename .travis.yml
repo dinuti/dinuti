@@ -18,7 +18,10 @@ script:
   - npm i
   - npm run lint
   - npm run build
+  - npm run dev # tests new man
   - cd ..
   - newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json
+after_script:
+  - docker-compose kill
 notifications:
  slack: dinuti:3LUFGSdQUxe6Qxv9JiXLpuB9
