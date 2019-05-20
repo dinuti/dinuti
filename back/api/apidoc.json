@@ -1,0 +1,12 @@
+{
+    "name": "Dinuti",
+    "version": "0.0.1",
+    "description": "Dinuti: projet de gestion du travailleur isolé",
+    "title": "Projet de gestion du travailleur isolé",
+    "url": "http://localhost:3000/api",
+    "sampleUrl": "http://localhost:3000/api",
+    "template": {
+      "withCompare": true,
+      "withGenerator": true
+    }
+  }
