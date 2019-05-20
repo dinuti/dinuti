@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5a45678a-5a44-4c1d-94af-3a71523342f6",
+		"_postman_id": "28a56357-fcde-4f3a-895a-668cc45f8aed",
 		"name": "dinuti",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -50,113 +50,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\", \"username\":\"Kevin\", \"firstName\": \"Kevin\", \"lastName\": \"B\"}}"
-								},
-								"url": {
-									"raw": "{{apiUrl}}/users",
-									"host": [
-										"{{apiUrl}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Register Marlene",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3f554961-8416-4a27-a7e5-e0691f523668",
-										"exec": [
-											"if (!(environment.isIntegrationTest)) {",
-											"var responseJSON = JSON.parse(responseBody);",
-											"",
-											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
-											"",
-											"var user = responseJSON.user || {};",
-											"",
-											"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
-											"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
-											"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
-											"}",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "X-Requested-With",
-										"value": "XMLHttpRequest"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"marly@gmail.com\", \"password\":\"marlene\", \"username\":\"marlene\", \"firstName\": \"marlene\", \"lastName\": \"A\"}}"
-								},
-								"url": {
-									"raw": "{{apiUrl}}/users",
-									"host": [
-										"{{apiUrl}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Register Mohammed",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "3f554961-8416-4a27-a7e5-e0691f523668",
-										"exec": [
-											"if (!(environment.isIntegrationTest)) {",
-											"var responseJSON = JSON.parse(responseBody);",
-											"",
-											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
-											"",
-											"var user = responseJSON.user || {};",
-											"",
-											"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
-											"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
-											"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
-											"}",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "X-Requested-With",
-										"value": "XMLHttpRequest"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"aqasbi.mohamed@gmail.com\", \"password\":\"simo\", \"username\":\"Mohammed\", \"firstName\": \"Mohammed\", \"lastName\": \"A\"}}"
+									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\", \"username\":\"Kevin1\", \"firstName\": \"Kevin\", \"lastName\": \"B\"}}"
 								},
 								"url": {
 									"raw": "{{apiUrl}}/users",
@@ -209,7 +103,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\", \"username\":\"florian\", \"firstName\": \"florian\", \"lastName\": \"Blay\"}}"
+									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\", \"username\":\"Florian\", \"firstName\": \"Florian\", \"lastName\": \"Blay\"}}"
 								},
 								"url": {
 									"raw": "{{apiUrl}}/users",
@@ -272,122 +166,6 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\"}}"
-								},
-								"url": {
-									"raw": "{{apiUrl}}/users/login",
-									"host": [
-										"{{apiUrl}}"
-									],
-									"path": [
-										"users",
-										"login"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Login Marlene and Remember Token Copy",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "f9cf791f-3d68-4cd3-bdc3-0a5e9cba9e69",
-										"exec": [
-											"var responseJSON = JSON.parse(responseBody);",
-											"",
-											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
-											"",
-											"var user = responseJSON.user || {};",
-											"",
-											"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
-											"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
-											"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
-											"",
-											"if(tests['User has \"token\" property']){",
-											"    postman.setEnvironmentVariable('token', user.token);",
-											"}",
-											"",
-											"tests['Environment variable \"token\" has been set'] = environment.token === user.token;",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "X-Requested-With",
-										"value": "XMLHttpRequest"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"marly@gmail.com\", \"password\":\"marlene\"}}"
-								},
-								"url": {
-									"raw": "{{apiUrl}}/users/login",
-									"host": [
-										"{{apiUrl}}"
-									],
-									"path": [
-										"users",
-										"login"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Login Mohammed and Remember Token Copy",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "6c48fbb5-e180-462e-a59e-704d2b6690a5",
-										"exec": [
-											"var responseJSON = JSON.parse(responseBody);",
-											"",
-											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
-											"",
-											"var user = responseJSON.user || {};",
-											"",
-											"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
-											"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
-											"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
-											"",
-											"if(tests['User has \"token\" property']){",
-											"    postman.setEnvironmentVariable('token', user.token);",
-											"}",
-											"",
-											"tests['Environment variable \"token\" has been set'] = environment.token === user.token;",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "X-Requested-With",
-										"value": "XMLHttpRequest"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"aqasbi.mohamed@gmail.com\", \"password\":\"simo\"}}"
 								},
 								"url": {
 									"raw": "{{apiUrl}}/users/login",
@@ -506,10 +284,6 @@
 								"value": "Token {{token}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{apiUrl}}/user",
 							"host": [
@@ -587,7 +361,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
+								"id": "0d609ec7-1c06-4925-80e3-3e477ac3051d",
 								"exec": [
 									"if (!(environment.isIntegrationTest)) {",
 									"var is200Response = responseCode.code === 200;",
@@ -602,12 +376,11 @@
 									"    var profile = responseJSON.profile || {};",
 									"    ",
 									"    tests['Profile has \"username\" property'] = profile.hasOwnProperty('username');",
-									"    tests['Profile has \"image\" property'] = profile.hasOwnProperty('image');",
-									"    tests['Profile has \"following\" property'] = profile.hasOwnProperty('following');",
 									"}",
 									"}",
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -627,10 +400,6 @@
 								"value": "Token {{token}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "{{apiUrl}}/profiles/florian",
 							"host": [
@@ -659,27 +428,12 @@
 								"exec": [
 									"var responseJSON = JSON.parse(responseBody);",
 									"",
-									"tests['Response contains \"article\" property'] = responseJSON.hasOwnProperty('article');",
+									"tests['Response contains \"location\" property'] = responseJSON.hasOwnProperty('location');",
 									"",
-									"var article = responseJSON.article || {};",
+									"var location = responseJSON.location || {};",
 									"",
-									"tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
-									"tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
-									"if(tests['Article has \"slug\" property']){",
-									"    postman.setEnvironmentVariable('slug', article.slug);",
-									"}",
-									"tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
-									"tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
-									"tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
-									"tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
-									"tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
-									"tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
-									"tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
-									"tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
-									"tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
-									"tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
-									"tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
-									"tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+									"tests['location has \"floor\" property'] = location.hasOwnProperty('floor');",
+									"tests['location has \"room\" property'] = location.hasOwnProperty('room');",
 									""
 								],
 								"type": "text/javascript"
