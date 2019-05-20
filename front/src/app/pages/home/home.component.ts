@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { AuthService } from 'src/app/providers/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,12 @@ import { Socket } from 'ngx-socket-io';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public socket: Socket) { }
+  constructor(private socket: Socket, private auth: AuthService) { }
 
   ngOnInit() {
-    this.socket.emit('message', 'bonjour');
+    this.auth.checkAuthentication().then((user) => {
+      this.socket.emit('auth', user);
+    });
     this.socket.on('message', (ev: any) => {
       console.log(ev);
     });
