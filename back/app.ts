@@ -1,19 +1,19 @@
 
 import * as express from 'express';
+// tslint:disable-next-line:no-duplicate-imports
 import { Application } from 'express';
-import * as bodyParser from 'body-parser';
 import { MainRouter } from './api/routes/index';
 import { connectToMongoDB } from './api/utilities/database';
 import { loadErrorHandlers } from './api/utilities/error-handling';
 import './api/utilities/passport';
 import * as session from 'express-session';
-import * as socketio from "socket.io";
-import * as cors from "cors";
+import * as cors from 'cors';
 
 const app: Application = express();
-const http = require("http").Server(app);
+const http = require('http').Server(app);
+const bodyParser = require('body-parser');
 http.listen(4000);
-const io = require("socket.io")(http);
+const io = require('socket.io')(http);
 
 const dbUri: string = process.argv[2] ? process.argv[2] : '';
 
@@ -27,20 +27,20 @@ app.use('/doc', express.static('./apidoc'));
 
 loadErrorHandlers(app);
 
-io.on("connection", function(socket: any) {
+io.on('connection', (socket: any) => {
 	log(`${Object.keys(io.sockets.connected).length} user connected`);
-	socket.on("auth", res => {
+	socket.on('auth', (res: any) => {
 		log(`${res.user.email} est connecté`);
-		socket.sessionid = res.user.email
-		io.emit("message", { type: "new-message", text: res });
+		socket.sessionid = res.user.email;
+		io.emit('message', { type: 'new-message', text: res });
 	});
-	socket.on("disconnect", () => log(`closed connection ${socket.sessionid}`))
+	socket.on('disconnect', () => log(`closed connection ${socket.sessionid}`));
 });
 
-const server = app.listen( 3000, () => {
-	console.log('Listening on port ' + server.address().port);
+const server = app.listen(3000, () => {
+	console.log(`Listening on port ${server.address().port}`);
 });
 
 function log(obj: any): void {
-	console.log('\x1b[42m%s\x1b[0m', obj)
-};
+	console.log('\x1b[42m%s\x1b[0m', obj);
+}

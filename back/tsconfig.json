@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+		"baseUrl": ".",
+		"paths": { "*": ["types/*"] },
+        "target": "es6",
+        "noImplicitAny": false,
+        "outDir": "built",
+        "rootDir": ".",
+        "sourceMap": false
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

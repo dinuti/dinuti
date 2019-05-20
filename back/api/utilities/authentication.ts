@@ -2,9 +2,7 @@
 import { Request } from 'express';
 import * as jwt from 'express-jwt';
 
-
 export const jwtSecret = process.env.NODE_ENV === 'production'  ?  process.env.SECRET : 'secret';
-
 
 function getTokenFromHeader(req: Request): string | null {
 
@@ -14,41 +12,31 @@ function getTokenFromHeader(req: Request): string | null {
 
 		if (Array.isArray(headerAuth)) {
 			return splitToken(headerAuth[0]);
-		} else {
-			return splitToken(headerAuth);
 		}
-
-	} else {
-
-		return null;
+		return splitToken(headerAuth);
 	}
+	return null;
 }
-
 
 function splitToken(authString: string) {
-
 	if (authString.split(' ')[0] === 'Token') {
 		return authString.split(' ')[1];
-
-	} else {
-		return null;
 	}
+	return null;
 }
 
+const auth = {
+	required: jwt({
+		credentialsRequired: true,
+		secret: jwtSecret,
+		getToken: getTokenFromHeader,
+		userProperty: 'payload'}),
 
-const	auth = {
-		required: jwt({
-			credentialsRequired: true,
-			secret: jwtSecret,
-			getToken: getTokenFromHeader,
-			userProperty: 'payload'}),
-
-		optional: jwt({
-			credentialsRequired: false,
-			secret: jwtSecret,
-			getToken: getTokenFromHeader,
-			userProperty: 'payload'})
+	optional: jwt({
+		credentialsRequired: false,
+		secret: jwtSecret,
+		getToken: getTokenFromHeader,
+		userProperty: 'payload'})
 };
-
 
 export const authentication = auth;

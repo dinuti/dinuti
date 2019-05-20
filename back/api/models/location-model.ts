@@ -7,12 +7,12 @@ export interface ILocationModel extends ILocation, Document {
 }
 
 const LocationSchema = new Schema({
-    floor: {type: String},
-    room: {type: String},
-	author: {type: Schema.Types.ObjectId, ref: 'User'}
-}, {timestamps: true});
+	floor: { type: String },
+	room: { type: String },
+	author: { type: Schema.Types.ObjectId, ref: 'User' }
+}, { timestamps: true });
 
-LocationSchema.methods.formatAsLocationJSON = function(user: IUserModel) {
+LocationSchema.methods.formatAsLocationJSON = function (user: IUserModel) {
 
 	return {
 		floor: this.floor,
