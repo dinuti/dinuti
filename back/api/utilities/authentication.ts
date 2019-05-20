@@ -12,10 +12,8 @@ function getTokenFromHeader(req: Request): string | null {
 
 		if (Array.isArray(headerAuth)) {
 			return splitToken(headerAuth[0]);
-		} else {
-			return splitToken(headerAuth);
 		}
-
+		return splitToken(headerAuth);
 	}
 	return null;
 }

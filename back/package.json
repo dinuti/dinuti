@@ -4,6 +4,8 @@
   "main": "app.ts",
   "scripts": {
     "dev": "nodemon --exec \"ts-node\" ./app.ts mongodb://localhost:27017/dinuti",
+    "build": "tsc",
+    "lint": "tslint --project .",
     "docker": "nodemon --exec \"ts-node\" ./app.ts mongodb://mongo-service:27017/dinuti"
   },
   "bugs": {

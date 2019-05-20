@@ -2,7 +2,6 @@
 import * as express from 'express';
 // tslint:disable-next-line:no-duplicate-imports
 import { Application } from 'express';
-import * as bodyParser from 'body-parser';
 import { MainRouter } from './api/routes/index';
 import { connectToMongoDB } from './api/utilities/database';
 import { loadErrorHandlers } from './api/utilities/error-handling';
@@ -12,6 +11,7 @@ import * as cors from 'cors';
 
 const app: Application = express();
 const http = require('http').Server(app);
+const bodyParser = require('body-parser');
 http.listen(4000);
 const io = require('socket.io')(http);
 

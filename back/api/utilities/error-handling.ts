@@ -6,7 +6,7 @@ export function loadErrorHandlers(app: Application) {
 	const isProduction = process.env.NODE_ENV === 'production';
 
 	// catch 404 errors and forward to error handler
-	app.use( (req, res, next) => {
+	app.use((req, res, next) => {
 
 		interface BetterError extends Error {
 			status?: number;
@@ -19,9 +19,8 @@ export function loadErrorHandlers(app: Application) {
 
 	// Dev error handler
 	if (!isProduction) {
-		app.use( (err, req, res, next) => {
+		app.use((err: any, req: any, res: any, next: any) => {
 			console.log(err.stack);
-
 			res.status(err.status || 500);
 
 			res.json({errors: {
@@ -32,7 +31,7 @@ export function loadErrorHandlers(app: Application) {
 	}
 
 // Production error handler (no stack traces displayed)
-	app.use( (err, req, res, next) => {
+	app.use((err, req, res, next) => {
 
 		res.status(err.status || 500);
 

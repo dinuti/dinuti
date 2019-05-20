@@ -13,5 +13,9 @@ script:
   - npm i
   - ng build --prod
   - ng lint
+  - cd ..\back
+  - npm i
+  - npm run lint
+  - npm run build
 notifications:
  slack: dinuti:3LUFGSdQUxe6Qxv9JiXLpuB9
