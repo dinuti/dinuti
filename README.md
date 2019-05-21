@@ -23,3 +23,9 @@ projet de gestion du travailleur isolé
 
 * Stop
 ```docker-compose down```
+
+* Front
+```localhost:8080```
+
+* Apidoc
+```localhost:3000/doc```
