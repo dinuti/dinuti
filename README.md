@@ -22,4 +22,4 @@ projet de gestion du travailleur isolé
 ```docker-compose up --build -d```
 
 * Stop
-```docker-compose stop```
+```docker-compose down```

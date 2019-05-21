@@ -18,3 +18,6 @@ RUN apidoc -i ./api -o apidoc/
 
 ## tell the port number the container should expose
 EXPOSE 3000
+EXPOSE 4000 
+
+CMD ["npm", "run", "docker"]

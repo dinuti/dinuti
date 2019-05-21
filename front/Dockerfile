@@ -1,12 +1,26 @@
-# This defines our starting point
-FROM node:10.15.3
+# The builder from node image
+FROM node:alpine as builder
 
-RUN mkdir /usr/src/app 
- 
-WORKDIR /usr/src/app
+# build-time variables 
+# prod|??? its value will be come from outside 
+ARG env=prod
 
-RUN npm install -g @angular/cli
+RUN apk update && apk add --no-cache make git
 
-COPY . .
+# Move our files into directory name "app"
+WORKDIR /app
+COPY package.json package-lock.json  /app/
+RUN npm install @angular/cli -g
+RUN cd /app && npm install
+COPY . /app
 
-RUN npm install
+# Build with $env variable from outside
+RUN cd /app && npm run build:$env
+
+# Build a small nginx image with static website
+FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/*
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
