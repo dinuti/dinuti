@@ -1,5 +1,5 @@
 # Base image
-FROM node:8.5.0
+FROM node:alpine
 
 ## Create app directory
 RUN mkdir -p /usr/src/app
