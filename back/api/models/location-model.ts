@@ -16,7 +16,6 @@ const LocationSchema = new Schema({
 }, { timestamps: true });
 
 LocationSchema.methods.formatAsLocationJSON = function (user: IUserModel) {
-
 	return {
 		floor: this.floor,
 		room: this.room,

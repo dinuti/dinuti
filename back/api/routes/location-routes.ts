@@ -25,15 +25,7 @@ router.param('username', (req: ProfileRequest, res: Response, next: NextFunction
 
 router.post('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 
-	const location: ILocationModel = new Location();
-
-	if (typeof req.body.location.room !== 'undefined' &&
-		typeof req.body.location.floor !== 'undefined') {
-		location.floor = req.body.location.floor;
-		location.room = req.body.location.room;
-	} else {
-		res.json('Error');
-	}
+	const location: ILocationModel = new Location(req.body.location);
 	User
 		.findById(req.payload.id)
 		.then((user: any) => {
