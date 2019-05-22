@@ -1,12 +1,18 @@
 <div class="container">
   <mat-form-field>
-    <input matInput placeholder="Location" [(ngModel)]="form.location">
+    <textarea matInput placeholder="Location description*" [(ngModel)]="form.location"></textarea>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Phone number" [(ngModel)]="form.phone">
+    <input matInput placeholder="Phone number*" [(ngModel)]="form.phone">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Mail" [(ngModel)]="form.mail">
+    <input matInput placeholder="Mobile number*" [(ngModel)]="form.mobile">
   </mat-form-field>
-  <button mat-raised-button color="primary">Submit</button>
+  <mat-form-field>
+    <input matInput placeholder="Floor" [(ngModel)]="form.floor">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Room" [(ngModel)]="form.room">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="postLocation()">Start session</button>
 </div>
