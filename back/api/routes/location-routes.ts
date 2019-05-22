@@ -1,10 +1,17 @@
 import { Router, NextFunction, Response } from 'express';
 import { authentication } from '../utilities/authentication';
-import { JWTRequest } from '../interfaces/requests-interface';
+import { JWTRequest, ProfileRequest } from '../interfaces/requests-interface';
 import { ILocationModel, Location } from '../models/location-model';
-import { User } from '../models/user-model';
+import { User, IUserModel } from '../models/user-model';
 
 const router: Router = Router();
+
+router.param('username', (req: ProfileRequest, res: Response, next: NextFunction, username: string) => {
+	User.findOne({ username }).then((user: IUserModel) => {
+		req.profile = user;
+		return next();
+	}).catch(next);
+});
 
 /**
  * @api {post} /location/
@@ -38,4 +45,11 @@ router.post('/', authentication.required, (req: JWTRequest, res: Response, next:
 		.catch(next);
 });
 
+router.get('/:username', authentication.required, (req: ProfileRequest, res: Response, next: NextFunction) => {
+	Location.findOne({ author: req.profile.id }).populate('author').then((resultat) => {
+		return res.status(200).json(resultat);
+	});
+});
+
 export const LocationRoutes: Router = router;
+
