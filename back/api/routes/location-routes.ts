@@ -46,10 +46,9 @@ router.post('/', authentication.required, (req: JWTRequest, res: Response, next:
 });
 
 router.get('/:username', authentication.required, (req: ProfileRequest, res: Response, next: NextFunction) => {
-	Location.findOne({ author: req.profile.id }).populate('author').then((resultat) => {
-		return res.status(200).json(resultat);
-	});
+	Location.findOne({ author: req.profile.id }).populate('author').then((location) => {
+		return res.status(200).json(location);
+	}).catch(next);
 });
 
 export const LocationRoutes: Router = router;
-
