@@ -29,3 +29,6 @@ projet de gestion du travailleur isolé
 
 * Apidoc
 ```localhost:3000/doc```
+
+## Branch name
+us-{num-us}-task-{num task}
