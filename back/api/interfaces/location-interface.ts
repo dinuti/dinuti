@@ -4,4 +4,6 @@ export interface ILocation {
 	floor: string;
 	room: string;
 	author: IUserModel;
+	phone: string;
+	mobile: string;
 }

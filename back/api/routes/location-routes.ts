@@ -1,10 +1,17 @@
 import { Router, NextFunction, Response } from 'express';
 import { authentication } from '../utilities/authentication';
-import { JWTRequest } from '../interfaces/requests-interface';
+import { JWTRequest, ProfileRequest } from '../interfaces/requests-interface';
 import { ILocationModel, Location } from '../models/location-model';
-import { User } from '../models/user-model';
+import { User, IUserModel } from '../models/user-model';
 
 const router: Router = Router();
+
+router.param('username', (req: ProfileRequest, res: Response, next: NextFunction, username: string) => {
+	User.findOne({ username }).then((user: IUserModel) => {
+		req.profile = user;
+		return next();
+	}).catch(next);
+});
 
 /**
  * @api {post} /location/
@@ -15,18 +22,8 @@ const router: Router = Router();
  * @apiError (401) {String} Error Error Unauthorized or Error Param not defined
  *
 */
-
 router.post('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
-
-	const location: ILocationModel = new Location();
-
-	if (typeof req.body.location.room !== 'undefined' &&
-		typeof req.body.location.floor !== 'undefined') {
-		location.floor = req.body.location.floor;
-		location.room = req.body.location.room;
-	} else {
-		res.json('Error');
-	}
+	const location: ILocationModel = new Location(req.body.location);
 	User
 		.findById(req.payload.id)
 		.then((user: any) => {
@@ -36,6 +33,21 @@ router.post('/', authentication.required, (req: JWTRequest, res: Response, next:
 			});
 		})
 		.catch(next);
+});
+
+/**
+ * @api {get} /location/
+ * @apiName Get Location
+ * @apiDescription Get the Location by username
+ * @apiGroup Location
+ * @apiSuccess {Location} Location of the username
+ * @apiError (401) {String} Error Error Unauthorized or Error Param not defined
+ *
+*/
+router.get('/:username', authentication.required, (req: ProfileRequest, res: Response, next: NextFunction) => {
+	Location.findOne({ author: req.profile.id }).populate('author').then((location) => {
+		return res.status(200).json({ location: location.formatAsLocationJSON(req.profile) });
+	}).catch(next);
 });
 
 export const LocationRoutes: Router = router;
