@@ -55,6 +55,7 @@ UserSchema.methods.passwordIsValid = function (password: string): boolean {
 
 UserSchema.methods.formatAsProfileJSON = function (user: IUserModel) {
 	return {
+		email: this.email,
 		username: this.username
 	};
 };
