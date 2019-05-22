@@ -38,7 +38,7 @@ io.on('connection', (socket: any) => {
 });
 
 const server = app.listen(3000, () => {
-	console.log(`Listening on port ${server.address().port}`);
+	// console.log(`Listening on port ${server.address().port}`);
 });
 
 function log(obj: any): void {

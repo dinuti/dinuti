@@ -1,5 +1,5 @@
 # Base image
-FROM node:8.5.0
+FROM node:alpine
 
 ## Create app directory
 RUN mkdir -p /usr/src/app
@@ -18,3 +18,6 @@ RUN apidoc -i ./api -o apidoc/
 
 ## tell the port number the container should expose
 EXPOSE 3000
+EXPOSE 4000 
+
+CMD ["npm", "run", "docker"]

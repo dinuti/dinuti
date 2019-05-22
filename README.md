@@ -22,4 +22,10 @@ projet de gestion du travailleur isolé
 ```docker-compose up --build -d```
 
 * Stop
-```docker-compose stop```
+```docker-compose down```
+
+* Front
+```localhost:8080```
+
+* Apidoc
+```localhost:3000/doc```
