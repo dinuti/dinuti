@@ -21,6 +21,6 @@ script:
   - netstat -tulpn
   - docker-compose logs
   - newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json
-  - curl http://localhost:3000/location
+  - curl http://localhost:5000/location
 notifications:
 slack: dinuti:3LUFGSdQUxe6Qxv9JiXLpuB9

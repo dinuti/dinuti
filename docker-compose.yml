@@ -13,7 +13,7 @@ services:
     restart: always
     build: ./back
     ports:
-      - '3000:3000'
+      - '5000:5000'
     depends_on:
       - mongo-service
   mongo-service:
