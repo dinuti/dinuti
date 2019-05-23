@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "28a56357-fcde-4f3a-895a-668cc45f8aed",
+		"_postman_id": "6a7d72da-1c0c-4d6a-9f3b-40d9d537c203",
 		"name": "dinuti",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,7 +9,7 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "sign-up",
+					"name": "sign-in",
 					"item": [
 						{
 							"name": "Register Kevin",
@@ -21,6 +21,7 @@
 										"exec": [
 											"if (!(environment.isIntegrationTest)) {",
 											"var responseJSON = JSON.parse(responseBody);",
+											"console.log(responseJSON);",
 											"",
 											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
 											"",
