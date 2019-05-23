@@ -18,11 +18,8 @@ before_script:
   - npm i -g newman
 script:
   - cd front
-  - npm i
-  - ng build --prod
   - ng lint
   - cd ../back
-  - npm i
   - npm run lint
   - npm run build
   - docker-compose up --build -d
