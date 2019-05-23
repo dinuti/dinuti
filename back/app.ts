@@ -37,7 +37,7 @@ io.on('connection', (socket: any) => {
 	socket.on('disconnect', () => log(`closed connection ${socket.sessionid}`));
 });
 
-const server = app.listen(5000, () => {
+const server = app.listen(3000, () => {
 	// console.log(`Listening on port ${server.address().port}`);
 });
 
