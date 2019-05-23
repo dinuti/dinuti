@@ -9,7 +9,7 @@ import { ServiceService } from 'src/app/providers/service.service';
 })
 export class FormSessionComponent implements OnInit {
 
-  @Output() startSession = new EventEmitter<boolean>();
+  @Output() startSession: EventEmitter<void> = new EventEmitter<void>();
   form: FormSession = new FormSession();
 
   constructor(private service: ServiceService) {}
@@ -19,7 +19,7 @@ export class FormSessionComponent implements OnInit {
 
   postLocation() {
     this.service.createSession(this.form).then((location) => {
-      this.startSession.emit(true);
+      this.startSession.emit();
     });
   }
 

@@ -21,9 +21,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  startSession(start: boolean) {
-    if (this.user && start) {
-      this.start = start;
+  startSession() {
+    if (this.user) {
+      this.start = true;
       this.socket.emit('auth', this.user);
       this.socket.on('message', (msg: any) => {
         console.log(msg);
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  stop() {
+  stopSession() {
     this.start = false;
   }
 }
