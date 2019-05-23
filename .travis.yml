@@ -26,6 +26,7 @@ script:
   - npm run lint
   - npm run build
   - docker-compose up --build -d
+  - docker-compose ps
   #- cd ..
   #- newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json
 notifications:
