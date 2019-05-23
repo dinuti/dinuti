@@ -10,6 +10,7 @@ import { User } from 'src/app/model/user';
 })
 export class HomeComponent implements OnInit {
 
+  public start: boolean;
   private user: User;
 
   constructor(private socket: Socket, private auth: AuthService) { }
@@ -22,10 +23,15 @@ export class HomeComponent implements OnInit {
 
   startSession(start: boolean) {
     if (this.user && start) {
+      this.start = start;
       this.socket.emit('auth', this.user);
       this.socket.on('message', (msg: any) => {
         console.log(msg);
       });
     }
+  }
+
+  stop() {
+    this.start = false;
   }
 }
