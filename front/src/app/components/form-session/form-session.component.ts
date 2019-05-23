@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormSession } from 'src/app/model/form';
 import { ServiceService } from 'src/app/providers/service.service';
 
@@ -9,6 +9,7 @@ import { ServiceService } from 'src/app/providers/service.service';
 })
 export class FormSessionComponent implements OnInit {
 
+  @Output() startSession = new EventEmitter<boolean>();
   form: FormSession = new FormSession();
 
   constructor(private service: ServiceService) {}
@@ -17,8 +18,8 @@ export class FormSessionComponent implements OnInit {
   }
 
   postLocation() {
-    this.service.createLocation(this.form).then((location) => {
-      // créer la session
+    this.service.createSession(this.form).then((location) => {
+      this.startSession.emit(true);
     });
   }
 

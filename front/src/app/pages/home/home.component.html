@@ -1,1 +1,1 @@
-<app-form-session></app-form-session>
+<app-form-session *ngIf="user" (startSession)="startSession($event)"></app-form-session>
