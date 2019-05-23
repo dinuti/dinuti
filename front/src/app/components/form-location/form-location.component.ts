@@ -9,7 +9,7 @@ import { ServiceService } from 'src/app/providers/service.service';
 })
 export class FormLocationComponent implements OnInit {
 
-  form: FormLocation = new FormLocation();
+  form: FormLocation = new FormLocation()
 
   constructor(private service: ServiceService) {}
 
