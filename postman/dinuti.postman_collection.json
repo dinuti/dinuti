@@ -474,6 +474,23 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "{{apiUrl}}/location",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/location",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"location"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
