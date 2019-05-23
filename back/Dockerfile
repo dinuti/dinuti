@@ -20,4 +20,10 @@ RUN apidoc -i ./api -o apidoc/
 EXPOSE 3000
 EXPOSE 4000 
 
+# run lint
+RUN npm run lint
+
+# run tsc
+RUN npm run build
+
 CMD ["npm", "run", "docker"]

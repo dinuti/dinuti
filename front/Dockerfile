@@ -14,6 +14,9 @@ RUN npm install @angular/cli -g
 RUN cd /app && npm install
 COPY . /app
 
+# run lint
+RUN ng lint
+
 # Build with $env variable from outside
 RUN cd /app && npm run build:$env
 
