@@ -18,6 +18,7 @@ before_script:
 script:
   - docker-compose up --build -d
   - docker-compose ps
+  - docker-compose logs
   #- cd ..
   #- newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json
 notifications:
