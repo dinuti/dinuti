@@ -18,6 +18,6 @@ before_script:
 script:
   - docker-compose up --build -d
   - docker-compose ps
-  - newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json
+  - newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json --verbose
 notifications:
 slack: dinuti:3LUFGSdQUxe6Qxv9JiXLpuB9
