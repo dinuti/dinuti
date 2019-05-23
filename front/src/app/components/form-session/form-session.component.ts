@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormLocation } from 'src/app/model/form';
+import { FormSession } from 'src/app/model/form';
 import { ServiceService } from 'src/app/providers/service.service';
 
 @Component({
-  selector: 'app-form-location',
-  templateUrl: './form-location.component.html',
-  styleUrls: ['./form-location.component.scss']
+  selector: 'app-form-session',
+  templateUrl: './form-session.component.html',
+  styleUrls: ['./form-session.component.scss']
 })
-export class FormLocationComponent implements OnInit {
+export class FormSessionComponent implements OnInit {
 
-  form: FormLocation = new FormLocation();
+  form: FormSession = new FormSession();
 
   constructor(private service: ServiceService) {}
 

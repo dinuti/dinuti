@@ -1,4 +1,4 @@
-export class FormLocation {
+export class FormSession {
   mail: string;
   phone: string;
   mobile: string;
