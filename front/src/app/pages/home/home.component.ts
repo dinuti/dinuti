@@ -11,7 +11,7 @@ import { User } from 'src/app/model/user';
 export class HomeComponent implements OnInit {
 
   public start: boolean;
-  private user: User;
+  public user: User;
 
   constructor(private socket: Socket, private auth: AuthService) { }
 
