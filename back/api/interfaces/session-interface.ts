@@ -3,8 +3,7 @@ import { IUserModel } from '../models/user-model';
 
 export interface ISession {
 	location: ILocationModel;
-	author: IUserModel;
+	user: IUserModel;
 	phone:string;
 	mobile:string;
-// status:Enumerator
-}
+}	// status:Enumerator
