@@ -50,7 +50,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\", \"username\":\"Kevin1\", \"firstName\": \"Kevin\", \"lastName\": \"B\"}}"
+									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\", \"username\":\"Kevin\", \"firstName\": \"Kevin\", \"lastName\": \"B\"}}"
 								},
 								"url": {
 									"raw": "{{apiUrl}}/users",
@@ -426,14 +426,7 @@
 							"script": {
 								"id": "669820b1-18f8-449e-86f1-664e07bec704",
 								"exec": [
-									"var responseJSON = JSON.parse(responseBody);",
 									"",
-									"tests['Response contains \"location\" property'] = responseJSON.hasOwnProperty('location');",
-									"",
-									"var location = responseJSON.location || {};",
-									"",
-									"tests['location has \"floor\" property'] = location.hasOwnProperty('floor');",
-									"tests['location has \"room\" property'] = location.hasOwnProperty('room');",
 									""
 								],
 								"type": "text/javascript"
@@ -458,7 +451,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"location\":{\n\t\"floor\": 5,\n\t\"room\": 154\n}}"
+							"raw": "{\n\"location\": {\n\t\"desc\": \"Ceci est une description\"\n\t}\n}"
 						},
 						"url": {
 							"raw": "{{apiUrl}}/location",
@@ -467,6 +460,65 @@
 							],
 							"path": [
 								"location"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Session",
+			"item": [
+				{
+					"name": "new session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "669820b1-18f8-449e-86f1-664e07bec704",
+								"exec": [
+									"var responseJSON = JSON.parse(responseBody);",
+									"",
+									"tests['Response contains \"session\" property'] = responseJSON.hasOwnProperty('session');",
+									"",
+									"var session = responseJSON.session || {};",
+									"",
+									"tests['session has \"floor\" property'] = session.hasOwnProperty('user');",
+									"tests['session has \"room\" property'] = session.hasOwnProperty('location');",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"session\": {\n\t\"phone\": \"0606060606\",\n\t\"mobile\": \"0202020202\",\n\t\"location\": {\n\t\t\"desc\": \"Ceci est une description\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/session",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"session"
 							]
 						}
 					},

@@ -1,8 +1,8 @@
 import { ILocation } from '../interfaces/location-interface';
 import { Schema, Model, model, Document } from 'mongoose';
-import { IUserModel } from './user-model';
 
 export interface ILocationModel extends ILocation, Document {
+	formatAsLocationJSON();
 }
 
 const LocationSchema = new Schema({
