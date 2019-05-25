@@ -17,9 +17,13 @@ export class FormSessionComponent implements OnInit {
   ngOnInit() {
   }
 
-  postLocation() {
-    this.service.createSession(this.form).then((session) => {
+  // call create session service, if success we send to page component an event
+  // to start socket session
+  postSession() {
+    this.service.createSession(this.form).then((session: any) => {
       this.startSession.emit();
+    }).catch(err => {
+      console.error(err);
     });
   }
 
