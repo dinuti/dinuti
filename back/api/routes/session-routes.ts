@@ -15,7 +15,6 @@ const router: Router = Router();
 * @apiSuccess {Session} Session Location of the Session
 * @apiError (Error 401) {String} Error Error Unauthorized or Error Param not defined
 */
-
 router.post('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 	const location: ILocationModel = new Location(req.body.session.location);
 	User.findById(req.payload.id).then(async (user: IUserModel) => {

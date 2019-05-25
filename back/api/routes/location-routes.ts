@@ -24,14 +24,10 @@ router.param('username', (req: ProfileRequest, res: Response, next: NextFunction
 */
 router.post('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 	const location: ILocationModel = new Location(req.body.location);
-	Location
-		.findById(req.payload.id)
-		.then((location: any) => {
-			return location.save().then(() => {
-				return res.json({ location: location.formatAsLocationJSON() });
-			});
-		})
-		.catch(next);
+	Location.findById(req.payload.id).then(async (loc: any) => {
+		await location.save();
+		return res.json({ location: loc.formatAsLocationJSON() });
+	}).catch(next);
 });
 
 export const LocationRoutes: Router = router;
