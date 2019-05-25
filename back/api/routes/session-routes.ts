@@ -1,6 +1,6 @@
 import { Router, NextFunction, Response } from 'express';
 import { authentication } from '../utilities/authentication';
-import { JWTRequest, ProfileRequest } from '../interfaces/requests-interface';
+import { JWTRequest } from '../interfaces/requests-interface';
 import { ILocationModel, Location } from '../models/location-model';
 import { User, IUserModel } from '../models/user-model';
 import { Session, ISessionModel } from '../models/session-model';
@@ -17,16 +17,18 @@ const router: Router = Router();
 */
 
 router.post('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
-	const session: ISessionModel = new Session(req.body.session);
-	console.log(req.body.session.location);
-	const location: ILocationModel = new Location();
-	location.desc = req.body.session.location.desc;
-	return location.save().then((loc) => {
-		console.log(loc);
-		return session.save().then(() => {
-			return res.json({ session: session.formatAsSessionJSON(req.payload, loc._id) });
-		})
-		.catch(next);
+	const location: ILocationModel = new Location(req.body.session.location);
+	User.findById(req.payload.id).then(async (user: IUserModel) => {
+		await location.save();
+		req.body.session.location = location;
+		req.body.session.user = user;
+		const session: ISessionModel = new Session(req.body.session);
+		try {
+			await session.save();
+			return res.json({ session: session.formatAsSessionJSON(user, location) });
+		} catch (err) {
+			return next(err);
+		}
 	});
 });
 

@@ -19,8 +19,8 @@ SessionSchema.methods.formatAsSessionJSON = function (user: IUserModel, location
 	return {
 		createdAt: this.createdAt,
 		updatedAt: this.updatedAt,
-		location: this.location.formatAsLocation(),
-		user: this.user.formatAsProfileJSON(),
+		user: this.user.formatAsProfileJSON(user),
+		location: this.location.formatAsLocationJSON(),
 		phone: this.phone,
 		mobile: this.mobile
 	};

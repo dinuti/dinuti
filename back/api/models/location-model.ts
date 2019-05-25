@@ -10,11 +10,9 @@ const LocationSchema = new Schema({
 }, { timestamps: true });
 
 LocationSchema.methods.formatAsLocationJSON = function () {
-
 	return {
 		desc: this.desc
 	};
-
 };
 
 export const Location: Model<ILocationModel> = model<ILocationModel>('Location', LocationSchema);
