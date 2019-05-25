@@ -18,7 +18,7 @@ export class FormSessionComponent implements OnInit {
   }
 
   postLocation() {
-    this.service.createSession(this.form).then((location) => {
+    this.service.createSession(this.form).then((session) => {
       this.startSession.emit();
     });
   }

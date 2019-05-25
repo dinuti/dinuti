@@ -13,7 +13,7 @@ export class ServiceService {
   constructor(public http: HttpClient, private general: GeneralService) { }
 
   async createSession(json) {
-    json = { location: json };
-    return this.general.post(`${this.baseUrl}/location`, json);
+    json = { session: json };
+    return this.general.post(`${this.baseUrl}/session`, json);
   }
 }

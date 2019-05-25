@@ -1,16 +1,20 @@
 export class FormSession {
-  mail: string;
   phone: string;
   mobile: string;
-  location: string;
-  floor: string;
-  room: string;
+  location: Location;
 
   constructor() {
     this.phone = '';
     this.mobile = '';
-    this.location = '';
-    this.floor = '';
-    this.room = '';
+    // tslint:disable: no-use-before-declare
+    this.location = new Location();
+  }
+}
+
+export class Location {
+  desc: string;
+
+  constructor() {
+    this.desc = '';
   }
 }
