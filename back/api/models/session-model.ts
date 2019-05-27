@@ -4,14 +4,14 @@ import { ILocationModel } from './location-model';
 import{ ISession } from '../interfaces/session-interface';
 
 export interface ISessionModel extends ISession, Document {
-	formatAsSessionJSON(user, location);
+	formatAsSessionJSON(user: IUserModel, location: ILocationModel);
 }
 
 const SessionSchema = new Schema({
 	location: { type: Schema.Types.ObjectId, ref: 'Location' },
 	user: { type: Schema.Types.ObjectId, ref: 'User' },
 	phone: { type: String },
-	mobile: { type : String }
+	mobile: { type: String }
 }, { timestamps: true });
 
 SessionSchema.methods.formatAsSessionJSON = function (user: IUserModel, location: ILocationModel) {

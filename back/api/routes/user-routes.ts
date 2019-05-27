@@ -61,7 +61,6 @@ router.put('/', authentication.required, (req: JWTRequest, res: Response, next: 
  * @apiError (401) {String} Error Username not found
  */
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
-
 	const user: IUserModel = new User();
 	user.username = req.body.user.username;
 	user.email = req.body.user.email;
@@ -83,26 +82,21 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
  * @apiError (401) {String} Error Failed authentication
  */
 router.post('/login', (req: Request, res: Response, next: NextFunction) => {
-
 	if (!req.body.user.email)  {
 		return res.status(422).json({ errors: { email: "Can't be blank" } });
 	}
-
 	if (!req.body.user.password)  {
 		return res.status(422).json({ errors: { password: "Can't be blank" } });
 	}
-
 	passport.authenticate('local', { session: false }, (err, user, info) => {
 		if (err) { return next(err); }
-
 		if (user) {
 			user.token = user.generateJWT();
 			return res.json({ user: user.formatAsUserJSON() });
 
 		}
 		return res.status(422).json(info);
-
 	})(req, res, next);
-
 });
+
 export const UserRoutes: Router = router;

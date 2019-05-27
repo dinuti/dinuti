@@ -4,6 +4,6 @@ import { IUserModel } from '../models/user-model';
 export interface ISession {
 	location: ILocationModel;
 	user: IUserModel;
-	phone:string;
-	mobile:string;
-}	// status:Enumerator
+	phone: string;
+	mobile: string;
+}
