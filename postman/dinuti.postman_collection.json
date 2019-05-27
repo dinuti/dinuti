@@ -106,12 +106,12 @@
 									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\", \"username\":\"Florian\", \"firstName\": \"Florian\", \"lastName\": \"Blay\"}}"
 								},
 								"url": {
-									"raw": "{{apiUrl}}/users",
+									"raw": "{{apiUrl}}/user",
 									"host": [
 										"{{apiUrl}}"
 									],
 									"path": [
-										"users"
+										"user"
 									]
 								}
 							},
