@@ -15,11 +15,15 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 before_script:
   - npm i -g newman
+  - npm i -g @angular/cli
 script:
-  - docker-compose up --build -d
-  - docker-compose ps
-  - netstat -tulpn
-  - docker-compose logs
+  - cd back
+  - npm i
+  - npm run dev
+  # - docker-compose up --build -d
+  # - docker-compose ps
+  # - netstat -tulpn
+  # - docker-compose logs
   - newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json
   - curl http://localhost:3000/location
 notifications:
