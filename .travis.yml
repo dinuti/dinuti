@@ -20,6 +20,7 @@ script:
   - cd back
   - npm i
   - npm run build
+  - cd ..
   # - docker-compose up --build -d
   # - docker-compose ps
   # - netstat -tulpn
