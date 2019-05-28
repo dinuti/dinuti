@@ -34,7 +34,7 @@ export class GeneralService {
 
   async put(url, json) {
     return new Promise(resolve => {
-      this.http.put(url, { article: json }, { headers: this.headers }).subscribe(data => {
+      this.http.put(url, json, { headers: this.headers }).subscribe(data => {
         resolve(data);
       }, err => {
         reject(err);
