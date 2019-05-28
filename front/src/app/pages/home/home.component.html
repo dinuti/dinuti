@@ -1,3 +1,3 @@
 <app-form-session *ngIf="user && !start" (startSession)="startSession()"></app-form-session>
 <button mat-raised-button color="primary" *ngIf="user && start" (click)="stop()">Stop session</button>
-<button mat-raised-button color="primary" *ngIf="user && start" (click)="modifieSession()">I'm alive</button>
+<button mat-raised-button color="primary" *ngIf="user && start" (click)="updateSession()">I'm alive</button>

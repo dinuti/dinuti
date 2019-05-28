@@ -33,8 +33,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  modifieSession() {
-    this.service.modifieSession({}).then((res) => {
+  updateSession() {
+    this.service.updateSession({}).then((res) => {
       console.log(res);
     }).catch(next => console.log(next));
   }

@@ -33,7 +33,7 @@ router.post('/', authentication.required, (req: JWTRequest, res: Response, next:
 
 router.put('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 	User.findById(req.payload.id).then(async (user: IUserModel) => {
-		Session.findOne({ user: req.payload.id }).then(async (session: ISessionModel) => {
+		Session.findOne({ user: req.payload.id }).sort({ updatedAt: -1 }).then(async (session: ISessionModel) => {
 			await session.update(session);
 			return res.json({ session });
 		}).catch(next);
