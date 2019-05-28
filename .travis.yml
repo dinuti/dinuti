@@ -18,8 +18,9 @@ before_script:
 script:
   - docker-compose up --build -d
   - docker-compose ps
+  - sleep 30
+  - newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json
+after_script:
   - docker-compose logs
-  #- cd ..
-  #- newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json
 notifications:
- slack: dinuti:3LUFGSdQUxe6Qxv9JiXLpuB9
+slack: dinuti:3LUFGSdQUxe6Qxv9JiXLpuB9

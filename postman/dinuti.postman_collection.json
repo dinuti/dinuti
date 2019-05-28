@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "28a56357-fcde-4f3a-895a-668cc45f8aed",
+		"_postman_id": "e30e4986-7a9e-42fb-b661-1764864fe330",
 		"name": "dinuti",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Users",
+			"name": "User",
 			"item": [
 				{
 					"name": "sign-up",
@@ -53,12 +53,12 @@
 									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\", \"username\":\"Kevin\", \"firstName\": \"Kevin\", \"lastName\": \"B\"}}"
 								},
 								"url": {
-									"raw": "{{apiUrl}}/users",
+									"raw": "{{apiUrl}}/user",
 									"host": [
 										"{{apiUrl}}"
 									],
 									"path": [
-										"users"
+										"user"
 									]
 								}
 							},
@@ -124,63 +124,6 @@
 					"name": "login",
 					"item": [
 						{
-							"name": "Login Florian and Remember Token",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"type": "text/javascript",
-										"exec": [
-											"var responseJSON = JSON.parse(responseBody);",
-											"",
-											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
-											"",
-											"var user = responseJSON.user || {};",
-											"",
-											"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
-											"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
-											"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
-											"",
-											"if(tests['User has \"token\" property']){",
-											"    postman.setEnvironmentVariable('token', user.token);",
-											"}",
-											"",
-											"tests['Environment variable \"token\" has been set'] = environment.token === user.token;",
-											""
-										]
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "X-Requested-With",
-										"value": "XMLHttpRequest"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\"}}"
-								},
-								"url": {
-									"raw": "{{apiUrl}}/users/login",
-									"host": [
-										"{{apiUrl}}"
-									],
-									"path": [
-										"users",
-										"login"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Login Kevin and Remember Token",
 							"event": [
 								{
@@ -226,12 +169,70 @@
 									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\"}}"
 								},
 								"url": {
-									"raw": "{{apiUrl}}/users/login",
+									"raw": "{{apiUrl}}/user/login",
 									"host": [
 										"{{apiUrl}}"
 									],
 									"path": [
-										"users",
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login Florian and Remember Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "cc73d9dc-cd56-4901-8cba-e29b2ad43dc8",
+										"exec": [
+											"var responseJSON = JSON.parse(responseBody);",
+											"",
+											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
+											"",
+											"var user = responseJSON.user || {};",
+											"",
+											"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
+											"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
+											"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
+											"",
+											"if(tests['User has \"token\" property']){",
+											"    postman.setEnvironmentVariable('token', user.token);",
+											"}",
+											"",
+											"tests['Environment variable \"token\" has been set'] = environment.token === user.token;",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\"}}"
+								},
+								"url": {
+									"raw": "{{apiUrl}}/user/login",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"user",
 										"login"
 									]
 								}
@@ -240,12 +241,7 @@
 						}
 					],
 					"_postman_isSubFolder": true
-				}
-			]
-		},
-		{
-			"name": "User",
-			"item": [
+				},
 				{
 					"name": "Current User",
 					"event": [
