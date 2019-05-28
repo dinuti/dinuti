@@ -22,32 +22,10 @@ router.param('username', (req: ProfileRequest, res: Response, next: NextFunction
  * @apiError (401) {String} Error Error Unauthorized or Error Param not defined
  *
 */
-router.post('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
+router.post('/', authentication.required, async (req: JWTRequest, res: Response, next: NextFunction) => {
 	const location: ILocationModel = new Location(req.body.location);
-	User
-		.findById(req.payload.id)
-		.then((user: any) => {
-			location.author = user;
-			return location.save().then(() => {
-				return res.json({ location: location.formatAsLocationJSON(user) });
-			});
-		})
-		.catch(next);
-});
-
-/**
- * @api {get} /location/
- * @apiName Get Location
- * @apiDescription Get the Location by username
- * @apiGroup Location
- * @apiSuccess {Location} Location of the username
- * @apiError (401) {String} Error Error Unauthorized or Error Param not defined
- *
-*/
-router.get('/:username', authentication.required, (req: ProfileRequest, res: Response, next: NextFunction) => {
-	Location.findOne({ author: req.profile.id }).populate('author').then((location) => {
-		return res.status(200).json({ location: location.formatAsLocationJSON(req.profile) });
-	}).catch(next);
+	await location.save();
+	return res.json({ location: location.formatAsLocationJSON() });
 });
 
 export const LocationRoutes: Router = router;

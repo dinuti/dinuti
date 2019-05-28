@@ -9,8 +9,8 @@ export interface IUserModel extends IUser, Document {
 	token?: string;
 	generateJWT(): string;
 	formatAsUserJSON();
-	setPassword(password): void;
-	passwordIsValid(password): boolean;
+	setPassword(password: string): void;
+	passwordIsValid(password: string): boolean;
 	formatAsProfileJSON(user);
 }
 
