@@ -26,6 +26,8 @@ export class FormLoginComponent implements OnInit {
       if (res.user.token) {
         this.router.navigateByUrl('/');
       }
+    }).catch(err => {
+      console.error(err);
     });
   }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GeneralService } from './general.service';
 import { environment } from '../environment/environment';
 import { HttpClient } from '@angular/common/http';
+import { FormSession } from '../model/form';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,7 @@ export class ServiceService {
 
   constructor(public http: HttpClient, private general: GeneralService) { }
 
-  async createLocation(json) {
-    json = { location: json };
-    return this.general.post(`${this.baseUrl}/location`, json);
+  async createSession(json: FormSession) {
+    return this.general.post(`${this.baseUrl}/session`, { session: json });
   }
 }

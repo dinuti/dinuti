@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatGridListModule, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormLocationComponent } from './components/form-location/form-location.component';
+import { FormSessionComponent } from './components/form-session/form-session.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -28,7 +28,7 @@ export function jwtOptionsFactory() {
 @NgModule({
   declarations: [
     AppComponent,
-    FormLocationComponent,
+    FormSessionComponent,
     HomeComponent,
     FormLoginComponent,
     FormSigninComponent,

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { reject } from 'q';
 
 @Injectable({ providedIn: 'root' })
 export class GeneralService {
@@ -16,7 +17,7 @@ export class GeneralService {
       this.http.post(url, json, { headers: this.headers }).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        reject(err);
       });
     });
   }
@@ -26,7 +27,7 @@ export class GeneralService {
       this.http.get(url, { headers: this.headers }).subscribe(data => {
       resolve(data);
       }, err => {
-        console.log(err);
+        reject(err);
       });
     });
   }
@@ -36,7 +37,7 @@ export class GeneralService {
       this.http.put(url, { article: json }, { headers: this.headers }).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        reject(err);
       });
     });
   }
@@ -46,7 +47,7 @@ export class GeneralService {
       this.http.delete(url, { headers: this.headers }).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        reject(err);
       });
     });
   }

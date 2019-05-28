@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { AuthService } from 'src/app/providers/auth.service';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +10,28 @@ import { AuthService } from 'src/app/providers/auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  public start: boolean;
+  public user: User;
+
   constructor(private socket: Socket, private auth: AuthService) { }
 
   ngOnInit() {
-    this.auth.checkAuthentication().then((user) => {
-      this.socket.emit('auth', user);
-    });
-    this.socket.on('message', (ev: any) => {
-      console.log(ev);
+    this.auth.checkAuthentication().then((user: User) => {
+      this.user = user;
     });
   }
 
+  startSession() {
+    if (this.user) {
+      this.start = true;
+      this.socket.emit('auth', this.user);
+      this.socket.on('message', (msg: any) => {
+        console.log(msg);
+      });
+    }
+  }
+
+  stopSession() {
+    this.start = false;
+  }
 }

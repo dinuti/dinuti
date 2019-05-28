@@ -1,1 +1,2 @@
-<app-form-location></app-form-location>
+<app-form-session *ngIf="user && !start" (startSession)="startSession()"></app-form-session>
+<button mat-raised-button color="primary" *ngIf="user && start" (click)="stop()">Stop session</button>
