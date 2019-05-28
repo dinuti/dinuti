@@ -16,7 +16,7 @@ COPY . /usr/src/app
 RUN npm install -g apidoc
 RUN apidoc -i ./api -o apidoc/
 
-## tell the port number the container should expose
+## tell the port numbers the container should expose
 EXPOSE 3000
 EXPOSE 4000 
 
