@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { AuthService } from 'src/app/providers/auth.service';
 import { User } from 'src/app/model/user';
+import { ServiceService } from 'src/app/providers/service.service';
+import { FormSession } from 'src/app/model/form';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,7 @@ export class HomeComponent implements OnInit {
   public start: boolean;
   public user: User;
 
-  constructor(private socket: Socket, private auth: AuthService) { }
+  constructor(private socket: Socket, private auth: AuthService, private service: ServiceService) { }
 
   ngOnInit() {
     this.auth.checkAuthentication().then((user: User) => {
@@ -31,6 +33,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  updateSession() {
+    this.service.updateSession({}).then((res) => {
+      console.log(res);
+    }).catch(next => console.log(next));
+  }
   stopSession() {
     this.start = false;
   }
