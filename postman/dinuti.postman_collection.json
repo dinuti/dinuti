@@ -129,7 +129,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"type": "text/javascript",
+										"id": "ed304ced-7227-4edd-900e-6c8a039cb137",
 										"exec": [
 											"var responseJSON = JSON.parse(responseBody);",
 											"",
@@ -147,7 +147,8 @@
 											"",
 											"tests['Environment variable \"token\" has been set'] = environment.token === user.token;",
 											""
-										]
+										],
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -168,12 +169,12 @@
 									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\"}}"
 								},
 								"url": {
-									"raw": "{{apiUrl}}/users/login",
+									"raw": "{{apiUrl}}/user/login",
 									"host": [
 										"{{apiUrl}}"
 									],
 									"path": [
-										"users",
+										"user",
 										"login"
 									]
 								}
@@ -226,12 +227,12 @@
 									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\"}}"
 								},
 								"url": {
-									"raw": "{{apiUrl}}/users/login",
+									"raw": "{{apiUrl}}/user/login",
 									"host": [
 										"{{apiUrl}}"
 									],
 									"path": [
-										"users",
+										"user",
 										"login"
 									]
 								}
@@ -511,6 +512,61 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\"session\": {\n\t\"phone\": \"0606060606\",\n\t\"mobile\": \"0202020202\",\n\t\"location\": {\n\t\t\"desc\": \"Ceci est une description\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/session",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"session"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a392cca1-522f-4371-8432-a07b945d41f5",
+								"exec": [
+									"var responseJSON = JSON.parse(responseBody);",
+									"",
+									"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
+									"",
+									"var user = responseJSON.user || {};",
+									"",
+									"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
+									"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
+									"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"session\": {\n        \"createdAt\": \"2019-05-28T08:11:30.403Z\",\n        \"updatedAt\": \"2019-05-28T08:11:30.403Z\",\n        \"user\": {\n            \"email\": \"john@jacob.com\",\n            \"username\": \"kevin1\"\n        },\n        \"location\": {\n            \"desc\": \"Ceci est une description\"\n        },\n        \"phone\": \"0606060606\",\n        \"mobile\": \"0202020202\"\n    }\n}"
 						},
 						"url": {
 							"raw": "{{apiUrl}}/session",
