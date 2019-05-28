@@ -23,5 +23,7 @@ script:
   - newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json
   - curl http://localhost:3000/location
   - docker-compose logs
+after_script:
+  - docker-compose logs
 notifications:
 slack: dinuti:3LUFGSdQUxe6Qxv9JiXLpuB9
