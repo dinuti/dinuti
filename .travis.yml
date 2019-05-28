@@ -20,6 +20,7 @@ script:
   - docker-compose ps
   - netstat -tulpn
   - docker-compose logs
+  - sleep 5
   - newman run postman/dinuti.postman_collection.json -e postman/dinuti.postman_environment.json
   - curl http://localhost:3000/location
 after_script:
