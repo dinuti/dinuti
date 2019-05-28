@@ -50,8 +50,4 @@ router.get('/:username', authentication.required, (req: ProfileRequest, res: Res
 	}).catch(next);
 });
 
-router.get('/', (req: ProfileRequest, res: Response, next: NextFunction) => {
-	return res.status(200).json({ test: 'ok' });
-});
-
 export const LocationRoutes: Router = router;
