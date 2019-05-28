@@ -19,7 +19,7 @@ const io = require('socket.io')(http);
 const dbUri: string = process.argv[2] ? process.argv[2] : '';
 connectToMongoDB(dbUri);
 
-const agenda = new Agenda({ db: { address: 'localhost:27017/dinuti', collection: 'agendaJobs' } });
+const agenda = new Agenda({ db: { address: dbUri, collection: 'agendaJobs' } });
 
 agenda.define('logUser', (job, done) => {
 	console.log('check user if alive');
