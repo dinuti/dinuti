@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6a7d72da-1c0c-4d6a-9f3b-40d9d537c203",
+		"_postman_id": "3e293211-8210-49dc-b7da-1edc539ebb01",
 		"name": "dinuti",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,7 +9,7 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "sign-in",
+					"name": "sign-up",
 					"item": [
 						{
 							"name": "Register Kevin",
@@ -21,7 +21,6 @@
 										"exec": [
 											"if (!(environment.isIntegrationTest)) {",
 											"var responseJSON = JSON.parse(responseBody);",
-											"console.log(responseJSON);",
 											"",
 											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
 											"",
@@ -51,15 +50,15 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\", \"username\":\"Kevin1\", \"firstName\": \"Kevin\", \"lastName\": \"B\"}}"
+									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\", \"username\":\"Kevin\", \"firstName\": \"Kevin\", \"lastName\": \"B\"}}"
 								},
 								"url": {
-									"raw": "{{apiUrl}}/users",
+									"raw": "{{apiUrl}}/user",
 									"host": [
 										"{{apiUrl}}"
 									],
 									"path": [
-										"users"
+										"user"
 									]
 								}
 							},
@@ -107,12 +106,12 @@
 									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\", \"username\":\"Florian\", \"firstName\": \"Florian\", \"lastName\": \"Blay\"}}"
 								},
 								"url": {
-									"raw": "{{apiUrl}}/users",
+									"raw": "{{apiUrl}}/user",
 									"host": [
 										"{{apiUrl}}"
 									],
 									"path": [
-										"users"
+										"user"
 									]
 								}
 							},
@@ -427,14 +426,7 @@
 							"script": {
 								"id": "669820b1-18f8-449e-86f1-664e07bec704",
 								"exec": [
-									"var responseJSON = JSON.parse(responseBody);",
 									"",
-									"tests['Response contains \"location\" property'] = responseJSON.hasOwnProperty('location');",
-									"",
-									"var location = responseJSON.location || {};",
-									"",
-									"tests['location has \"floor\" property'] = location.hasOwnProperty('floor');",
-									"tests['location has \"room\" property'] = location.hasOwnProperty('room');",
 									""
 								],
 								"type": "text/javascript"
@@ -459,7 +451,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"location\":{\n\t\"floor\": 5,\n\t\"room\": 154\n}}"
+							"raw": "{\n\"location\": {\n\t\"desc\": \"Ceci est une description\"\n\t}\n}"
 						},
 						"url": {
 							"raw": "{{apiUrl}}/location",
@@ -476,58 +468,63 @@
 			]
 		},
 		{
-			"name": "{{apiUrl}}/location",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/location",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"location"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "https://www.google.com/",
-			"event": [
+			"name": "Session",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "3a0ed6c0-3d3d-4ca9-bd2d-3ac27ab205d2",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://www.google.com/",
-					"protocol": "https",
-					"host": [
-						"www",
-						"google",
-						"com"
+					"name": "new session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "669820b1-18f8-449e-86f1-664e07bec704",
+								"exec": [
+									"var responseJSON = JSON.parse(responseBody);",
+									"",
+									"tests['Response contains \"session\" property'] = responseJSON.hasOwnProperty('session');",
+									"",
+									"var session = responseJSON.session || {};",
+									"",
+									"tests['session has \"floor\" property'] = session.hasOwnProperty('user');",
+									"tests['session has \"room\" property'] = session.hasOwnProperty('location');",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"path": [
-						""
-					]
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"session\": {\n\t\"phone\": \"0606060606\",\n\t\"mobile\": \"0202020202\",\n\t\"location\": {\n\t\t\"desc\": \"Ceci est une description\"\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/session",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"session"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
