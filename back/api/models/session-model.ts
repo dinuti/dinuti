@@ -2,6 +2,7 @@ import { Schema, Model, model, Document } from 'mongoose';
 import { IUserModel } from './user-model';
 import { ILocationModel } from './location-model';
 import{ ISession } from '../interfaces/session-interface';
+import { ObjectID } from 'bson';
 
 export interface ISessionModel extends ISession, Document {
 	formatAsSessionJSON(user: IUserModel, location: ILocationModel);
@@ -26,4 +27,5 @@ SessionSchema.methods.formatAsSessionJSON = function (user: IUserModel, location
 	};
 
 };
+
 export const Session: Model<ISessionModel> = model<ISessionModel>('Session', SessionSchema);
