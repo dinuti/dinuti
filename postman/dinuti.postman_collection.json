@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "28a56357-fcde-4f3a-895a-668cc45f8aed",
+		"_postman_id": "3e293211-8210-49dc-b7da-1edc539ebb01",
 		"name": "dinuti",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -53,12 +53,12 @@
 									"raw": "{\"user\":{\"email\":\"kevin@gmail.com\", \"password\":\"kevin\", \"username\":\"Kevin\", \"firstName\": \"Kevin\", \"lastName\": \"B\"}}"
 								},
 								"url": {
-									"raw": "{{apiUrl}}/users",
+									"raw": "{{apiUrl}}/user",
 									"host": [
 										"{{apiUrl}}"
 									],
 									"path": [
-										"users"
+										"user"
 									]
 								}
 							},
