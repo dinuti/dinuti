@@ -9,6 +9,7 @@ import './api/utilities/passport';
 import * as session from 'express-session';
 import * as cors from 'cors';
 
+const Agenda = require('agenda');
 const app: Application = express();
 const http = require('http').Server(app);
 const bodyParser = require('body-parser');
@@ -16,8 +17,19 @@ http.listen(4000);
 const io = require('socket.io')(http);
 
 const dbUri: string = process.argv[2] ? process.argv[2] : '';
-
 connectToMongoDB(dbUri);
+
+const agenda = new Agenda({ db: { address: 'localhost:27017/dinuti', collection: 'agendaJobs' } });
+
+agenda.define('logUser', (job, done) => {
+	console.log('check user if alive');
+	done();
+});
+
+agenda.on('ready', async () => {
+	await agenda.every('20 seconds', 'logUser');
+	await agenda.start();
+});
 
 app.use(bodyParser.json());
 app.use(cors());
