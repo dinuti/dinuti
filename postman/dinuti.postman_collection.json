@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "3e293211-8210-49dc-b7da-1edc539ebb01",
+		"_postman_id": "e30e4986-7a9e-42fb-b661-1764864fe330",
 		"name": "dinuti",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Users",
+			"name": "User",
 			"item": [
 				{
 					"name": "sign-up",
@@ -124,64 +124,6 @@
 					"name": "login",
 					"item": [
 						{
-							"name": "Login Florian and Remember Token",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "ed304ced-7227-4edd-900e-6c8a039cb137",
-										"exec": [
-											"var responseJSON = JSON.parse(responseBody);",
-											"",
-											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
-											"",
-											"var user = responseJSON.user || {};",
-											"",
-											"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
-											"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
-											"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
-											"",
-											"if(tests['User has \"token\" property']){",
-											"    postman.setEnvironmentVariable('token', user.token);",
-											"}",
-											"",
-											"tests['Environment variable \"token\" has been set'] = environment.token === user.token;",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"key": "X-Requested-With",
-										"value": "XMLHttpRequest"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\"}}"
-								},
-								"url": {
-									"raw": "{{apiUrl}}/user/login",
-									"host": [
-										"{{apiUrl}}"
-									],
-									"path": [
-										"user",
-										"login"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Login Kevin and Remember Token",
 							"event": [
 								{
@@ -238,15 +180,68 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Login Florian and Remember Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "cc73d9dc-cd56-4901-8cba-e29b2ad43dc8",
+										"exec": [
+											"var responseJSON = JSON.parse(responseBody);",
+											"",
+											"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
+											"",
+											"var user = responseJSON.user || {};",
+											"",
+											"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
+											"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
+											"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
+											"",
+											"if(tests['User has \"token\" property']){",
+											"    postman.setEnvironmentVariable('token', user.token);",
+											"}",
+											"",
+											"tests['Environment variable \"token\" has been set'] = environment.token === user.token;",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Requested-With",
+										"value": "XMLHttpRequest"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"user\":{\"email\":\"blayflorian@gmail.com\", \"password\":\"florian\"}}"
+								},
+								"url": {
+									"raw": "{{apiUrl}}/user/login",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
-				}
-			]
-		},
-		{
-			"name": "User",
-			"item": [
+				},
 				{
 					"name": "Current User",
 					"event": [
@@ -512,61 +507,6 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\"session\": {\n\t\"phone\": \"0606060606\",\n\t\"mobile\": \"0202020202\",\n\t\"location\": {\n\t\t\"desc\": \"Ceci est une description\"\n\t\t}\n\t}\n}"
-						},
-						"url": {
-							"raw": "{{apiUrl}}/session",
-							"host": [
-								"{{apiUrl}}"
-							],
-							"path": [
-								"session"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Session",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "a392cca1-522f-4371-8432-a07b945d41f5",
-								"exec": [
-									"var responseJSON = JSON.parse(responseBody);",
-									"",
-									"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
-									"",
-									"var user = responseJSON.user || {};",
-									"",
-									"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
-									"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
-									"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "X-Requested-With",
-								"value": "XMLHttpRequest"
-							},
-							{
-								"key": "Authorization",
-								"value": "Token {{token}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"session\": {\n        \"createdAt\": \"2019-05-28T08:11:30.403Z\",\n        \"updatedAt\": \"2019-05-28T08:11:30.403Z\",\n        \"user\": {\n            \"email\": \"john@jacob.com\",\n            \"username\": \"kevin1\"\n        },\n        \"location\": {\n            \"desc\": \"Ceci est une description\"\n        },\n        \"phone\": \"0606060606\",\n        \"mobile\": \"0202020202\"\n    }\n}"
 						},
 						"url": {
 							"raw": "{{apiUrl}}/session",
