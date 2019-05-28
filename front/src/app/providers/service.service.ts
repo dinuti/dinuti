@@ -16,4 +16,7 @@ export class ServiceService {
   async createSession(json: FormSession) {
     return this.general.post(`${this.baseUrl}/session`, { session: json });
   }
+  async modifieSession(json: any) {
+    return this.general.put(`${this.baseUrl}/session`, { session: json });
+  }
 }
