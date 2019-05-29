@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatGridListModule, MatIconModule } from '@angular/material';
+import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatGridListModule, MatIconModule, MatListModule, MatSidenavModule, MatCardModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormSessionComponent } from './components/form-session/form-session.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -49,7 +49,10 @@ export function jwtOptionsFactory() {
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatListModule,
     MatIconModule,
+    MatSidenavModule,
+    MatCardModule,
     FormsModule,
     BrowserAnimationsModule,
     MatGridListModule

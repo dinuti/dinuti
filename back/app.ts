@@ -25,11 +25,9 @@ const agenda = new Agenda({ db: { address: dbUri, collection: 'agendaJobs' } });
 
 agenda.define('logUser', (job, done) => {
 	const date = moment().subtract(5, 'minutes');
-	console.log(date);
 	Session.find({ statut: 1, lastAlive: { $lte: date } }).then((res: any) => {
 		console.log(res);
 	});
-	console.log('check user if alive');
 	done();
 });
 

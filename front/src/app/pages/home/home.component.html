@@ -1,3 +1,22 @@
+<div class="container">
+    <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+        <div class="blocks">
+            <button mat-raised-button color="primary" *ngIf="user && start" (click)="stopSession()">
+                Stop session
+            </button>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="user && start">
+        <mat-card class="card" >
+        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>How are you?</h3>
+        </mat-card-title>
+        <mat-card-content>
+            <button mat-raised-button color="primary" (click)="updateSession()">
+                I'm alive
+            </button>
+        </mat-card-content>
+        </mat-card>
+</div>
 <app-form-session *ngIf="user && !start" (startSession)="startSession()"></app-form-session>
-<button mat-raised-button color="primary" *ngIf="user && start" (click)="stopSession()">Stop session</button>
-<button mat-raised-button color="primary" *ngIf="user && start" (click)="updateSession()">I'm alive</button>
