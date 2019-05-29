@@ -3,7 +3,6 @@ import { Socket } from 'ngx-socket-io';
 import { AuthService } from 'src/app/providers/auth.service';
 import { User } from 'src/app/model/user';
 import { ServiceService } from 'src/app/providers/service.service';
-import { FormSession } from 'src/app/model/form';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +19,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.auth.checkAuthentication().then((user: User) => {
       this.user = user;
+      this.service.getSession().then((res: any) => {
+        console.log(res);
+        this.start = res.session && res.session.statut;
+      });
     });
   }
 
@@ -39,6 +42,11 @@ export class HomeComponent implements OnInit {
     }).catch(next => console.log(next));
   }
   stopSession() {
-    this.start = false;
+    this.service.closeSession().then(res => {
+      console.log(res);
+      this.start = false;
+    }).catch(err => {
+      console.log(err);
+    });
   }
 }

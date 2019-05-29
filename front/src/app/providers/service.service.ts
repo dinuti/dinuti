@@ -19,4 +19,10 @@ export class ServiceService {
   async updateSession(json: any) {
     return this.general.put(`${this.baseUrl}/session`, { session: json });
   }
+  async closeSession() {
+    return this.general.delete(`${this.baseUrl}/session`);
+  }
+  async getSession() {
+    return this.general.get(`${this.baseUrl}/session`);
+  }
 }
