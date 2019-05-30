@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit {
       this.start = true;
       this.socket.emit('auth', this.user);
       this.socket.on('message', (msg: any) => {
-        console.log(msg);
         if (msg.users) {
           this.usersNeedHelp = msg.users;
         }
