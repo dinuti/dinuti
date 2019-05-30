@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { AuthService } from 'src/app/providers/auth.service';
 import { User } from 'src/app/model/user';
 import { ServiceService } from 'src/app/providers/service.service';
+import { CountdownComponent } from 'ngx-countdown';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
 
   public start: boolean;
   public user: User;
+  @ViewChild(CountdownComponent) counter: CountdownComponent;
 
   constructor(private socket: Socket, private auth: AuthService, private service: ServiceService) { }
 
@@ -20,8 +22,10 @@ export class HomeComponent implements OnInit {
     this.auth.checkAuthentication().then((user: User) => {
       this.user = user;
       this.service.getSession().then((res: any) => {
-        console.log(res);
         this.start = res.session && res.session.statut;
+        if (this.start) {
+          this.updateSession();
+        }
       });
     });
   }
@@ -38,7 +42,7 @@ export class HomeComponent implements OnInit {
 
   updateSession() {
     this.service.updateSession({}).then((res) => {
-      console.log(res);
+      this.counter.restart();
     }).catch(next => console.log(next));
   }
   stopSession() {

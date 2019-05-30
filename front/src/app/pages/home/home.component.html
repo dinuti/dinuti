@@ -13,6 +13,12 @@
             <h3>How are you?</h3>
         </mat-card-title>
         <mat-card-content>
+            <countdown [config]="{leftTime: 300}"
+                (start)="onStart()"
+                (finished)="onFinished()"
+                (notify)="onNotify($event)">
+                $!m!:$!s!
+            </countdown>
             <button mat-raised-button color="primary" (click)="updateSession()">
                 I'm alive
             </button>
