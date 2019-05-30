@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
 
   public start: boolean;
   public user: User;
+  public usersNeedHelp: any[];
   @ViewChild(CountdownComponent) counter: CountdownComponent;
 
   constructor(private socket: Socket, private auth: AuthService, private service: ServiceService) { }
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
       this.service.getSession().then((res: any) => {
         this.start = res.session && res.session.statut;
         if (this.start) {
+          this.startSession();
           this.updateSession();
         }
       });
@@ -36,6 +38,9 @@ export class HomeComponent implements OnInit {
       this.socket.emit('auth', this.user);
       this.socket.on('message', (msg: any) => {
         console.log(msg);
+        if (msg.users) {
+          this.usersNeedHelp = msg.users;
+        }
       });
     }
   }

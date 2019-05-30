@@ -25,14 +25,14 @@ const agenda = new Agenda({ db: { address: dbUri, collection: 'agendaJobs' } });
 
 agenda.define('logUser', (job, done) => {
 	const date = moment().subtract(5, 'minutes');
-	Session.find({ statut: 1, lastAlive: { $lte: date } }).then((res: any) => {
-		console.log(res);
+	Session.find({ statut: 1, lastAlive: { $lte: date } }).populate('user').then((res: any[]) => {
+		io.emit('message', { type: 'alert', users: res });
 	});
 	done();
 });
 
 agenda.on('ready', async () => {
-	await agenda.every('20 seconds', 'logUser');
+	await agenda.every('10 seconds', 'logUser');
 	await agenda.start();
 });
 

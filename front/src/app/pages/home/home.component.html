@@ -13,10 +13,7 @@
             <h3>How are you?</h3>
         </mat-card-title>
         <mat-card-content>
-            <countdown [config]="{leftTime: 300}"
-                (start)="onStart()"
-                (finished)="onFinished()"
-                (notify)="onNotify($event)">
+            <countdown [config]="{leftTime: 300}">
                 $!m!:$!s!
             </countdown>
             <button mat-raised-button color="primary" (click)="updateSession()">
@@ -25,4 +22,21 @@
         </mat-card-content>
         </mat-card>
 </div>
+<div class="container" *ngIf="user && start">
+    <mat-card class="card" >
+        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>Someone need help?</h3>
+        </mat-card-title>
+        <mat-card-content>
+            <div *ngFor="let user of usersNeedHelp">
+                <p>{{user.user.username}}</p>
+                <p>{{user.user.email}}</p>
+                <p>{{user.mobile}}</p>
+                <p>{{user.phone}}</p>
+                <hr/>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
 <app-form-session *ngIf="user && !start" (startSession)="startSession()"></app-form-session>
