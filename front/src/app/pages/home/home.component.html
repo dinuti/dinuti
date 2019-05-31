@@ -1,29 +1,39 @@
-<div class="container">
-    <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
-        <div class="blocks">
-            <button mat-raised-button color="warn" (click)="sendAlert()">
-                Send alert
+<div class="container" *ngIf="user && start">
+    <mat-card class="card">
+        <button mat-raised-button color="warn" *ngIf="!isAlertPending" (click)="startAlertCountdown()">
+            Send alert
+        </button>
+        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column" *ngIf="isAlertPending">
+            <h3>An alert will be sent in:</h3>
+        </mat-card-title>
+        <mat-card-content *ngIf="isAlertPending">
+            <countdown #counterPendingAlert [config]="{leftTime: 10}"
+                (finished)="sendAlert()">
+                $!m!:$!s!
+            </countdown>
+            <button mat-raised-button color="accent" (click)="cancelAlert()">
+                Cancel
             </button>
-            <button mat-raised-button color="primary" *ngIf="user && start" (click)="stopSession()">
-                Stop session
-            </button>
-        </div>
-    </div>
+        </mat-card-content>
+    </mat-card>
 </div>
 <div class="container" *ngIf="user && start">
-        <mat-card class="card" >
+    <mat-card class="card">
+        <button mat-raised-button color="primary" (click)="stopSession()">
+            Stop session
+        </button>
         <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
             <h3>How are you?</h3>
         </mat-card-title>
         <mat-card-content>
-            <countdown [config]="{leftTime: 300}">
+            <countdown #counterIsAlive [config]="{leftTime: 300}">
                 $!m!:$!s!
             </countdown>
             <button mat-raised-button color="primary" (click)="updateSession()">
                 I'm alive
             </button>
         </mat-card-content>
-        </mat-card>
+    </mat-card>
 </div>
 <div class="container" *ngIf="user && start">
     <mat-card class="card" >
