@@ -32,7 +32,14 @@ router.post('/', authentication.required, (req: JWTRequest, res: Response, next:
 		}
 	});
 });
-
+/**
+* @api {get} /session/
+* @apiName Get Session
+* @apiDescription Return current Session
+* @apiGroup Session
+* @apiSuccess {Session} Session Location of the Session
+* @apiError (Error 401) {String} Error Error Unauthorized or Error Param not defined
+*/
 router.get('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 	User.findById(req.payload.id).then(async (user: IUserModel) => {
 		Session.findOne({ user: user._id }).sort({ lastAlive: -1 }).limit(1).then(async (session: ISessionModel) => {
@@ -40,7 +47,14 @@ router.get('/', authentication.required, (req: JWTRequest, res: Response, next: 
 		}).catch(next);
 	}).catch(next);
 });
-
+/**
+* @api {put} /session/
+* @apiName Put Session
+* @apiDescription Modify the last Session
+* @apiGroup Session
+* @apiSuccess {Session} Session Location of the Session
+* @apiError (Error 401) {String} Error Error Unauthorized or Error Param not defined
+*/
 router.put('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 	User.findById(req.payload.id).then(async (user: IUserModel) => {
 		Session.findOne({ user: req.payload.id }).sort({ lastAlive: -1 }).then(async (session: ISessionModel) => {
@@ -50,7 +64,14 @@ router.put('/', authentication.required, (req: JWTRequest, res: Response, next: 
 		}).catch(next);
 	});
 });
-
+/**
+* @api {delete} /session/
+* @apiName Delete Session
+* @apiDescription Safe delete Session, update statut to 0
+* @apiGroup Session
+* @apiSuccess {Session} Session Location of the Session
+* @apiError (Error 401) {String} Error Error Unauthorized or Error Param not defined
+*/
 router.delete('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 	User.findById(req.payload.id).then(async (user: IUserModel) => {
 		Session.findOne({ user: user._id }).sort({ lastAlive: -1 }).limit(1).then(async (session: ISessionModel) => {
