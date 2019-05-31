@@ -71,12 +71,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  notify(ev) {
+  notify(ev: any) {
     const percent = ev.left / (this.time * 10);
     this.color = this.hsl_col_perc(percent);
   }
 
-  hsl_col_perc(percent) {
+  hsl_col_perc(percent: number) {
     const red = 0;
     const green = 120;
     const a = percent / 100;
