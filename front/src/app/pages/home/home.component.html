@@ -1,6 +1,9 @@
 <div class="container">
     <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
         <div class="blocks">
+            <button mat-raised-button color="warn" (click)="sendAlert()">
+                Send alert
+            </button>
             <button mat-raised-button color="primary" *ngIf="user && start" (click)="stopSession()">
                 Stop session
             </button>

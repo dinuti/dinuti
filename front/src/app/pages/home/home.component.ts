@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
       this.counter.restart();
     }).catch(next => console.log(next));
   }
+
   stopSession() {
     this.service.closeSession().then(res => {
       console.log(res);
@@ -57,4 +58,9 @@ export class HomeComponent implements OnInit {
       console.log(err);
     });
   }
+
+  sendAlert() {
+    console.log('alert');
+  }
+
 }
