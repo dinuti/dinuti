@@ -12,8 +12,8 @@
         <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
             <h3>How are you?</h3>
         </mat-card-title>
-        <mat-card-content>
-            <countdown [config]="{leftTime: 300}">
+        <mat-card-content [style.backgroundColor]="color">
+            <countdown [config]="config" (event)="notify($event)">
                 $!m!:$!s!
             </countdown>
             <button mat-raised-button color="primary" (click)="updateSession()">
