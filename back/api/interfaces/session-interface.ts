@@ -6,4 +6,6 @@ export interface ISession {
 	user: IUserModel;
 	phone: string;
 	mobile: string;
+	statut: number;
+	lastAlive: number;
 }

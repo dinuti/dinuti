@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { AuthService } from 'src/app/providers/auth.service';
 import { User } from 'src/app/model/user';
 import { ServiceService } from 'src/app/providers/service.service';
-import { FormSession } from 'src/app/model/form';
+import { CountdownComponent } from 'ngx-countdown';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +14,21 @@ export class HomeComponent implements OnInit {
 
   public start: boolean;
   public user: User;
+  public usersNeedHelp: any[];
+  @ViewChild(CountdownComponent) counter: CountdownComponent;
 
   constructor(private socket: Socket, private auth: AuthService, private service: ServiceService) { }
 
   ngOnInit() {
     this.auth.checkAuthentication().then((user: User) => {
       this.user = user;
+      this.service.getSession().then((res: any) => {
+        this.start = res.session && res.session.statut;
+        if (this.start) {
+          this.startSession();
+          this.updateSession();
+        }
+      });
     });
   }
 
@@ -28,17 +37,24 @@ export class HomeComponent implements OnInit {
       this.start = true;
       this.socket.emit('auth', this.user);
       this.socket.on('message', (msg: any) => {
-        console.log(msg);
+        if (msg.users) {
+          this.usersNeedHelp = msg.users;
+        }
       });
     }
   }
 
   updateSession() {
     this.service.updateSession({}).then((res) => {
-      console.log(res);
+      this.counter.restart();
     }).catch(next => console.log(next));
   }
   stopSession() {
-    this.start = false;
+    this.service.closeSession().then(res => {
+      console.log(res);
+      this.start = false;
+    }).catch(err => {
+      console.log(err);
+    });
   }
 }

@@ -8,8 +8,10 @@ import { loadErrorHandlers } from './api/utilities/error-handling';
 import './api/utilities/passport';
 import * as session from 'express-session';
 import * as cors from 'cors';
+import { Session } from './api/models/session-model';
 
 const Agenda = require('agenda');
+const moment = require('moment');
 const app: Application = express();
 const http = require('http').Server(app);
 const bodyParser = require('body-parser');
@@ -22,12 +24,15 @@ connectToMongoDB(dbUri);
 const agenda = new Agenda({ db: { address: dbUri, collection: 'agendaJobs' } });
 
 agenda.define('logUser', (job, done) => {
-	console.log('check user if alive');
+	const date = moment().subtract(5, 'minutes');
+	Session.find({ statut: 1, lastAlive: { $lte: date } }).populate('user').then((res: any[]) => {
+		io.emit('message', { type: 'alert', users: res });
+	});
 	done();
 });
 
 agenda.on('ready', async () => {
-	await agenda.every('20 seconds', 'logUser');
+	await agenda.every('10 seconds', 'logUser');
 	await agenda.start();
 });
 

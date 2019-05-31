@@ -21,6 +21,8 @@ router.post('/', authentication.required, (req: JWTRequest, res: Response, next:
 		await location.save();
 		req.body.session.location = location;
 		req.body.session.user = user;
+		req.body.session.statut = 1;
+		req.body.session.lastAlive = Date.now();
 		const session: ISessionModel = new Session(req.body.session);
 		try {
 			await session.save();
@@ -31,10 +33,29 @@ router.post('/', authentication.required, (req: JWTRequest, res: Response, next:
 	});
 });
 
+router.get('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
+	User.findById(req.payload.id).then(async (user: IUserModel) => {
+		Session.findOne({ user: user._id }).sort({ lastAlive: -1 }).limit(1).then(async (session: ISessionModel) => {
+			return res.json({ session });
+		}).catch(next);
+	}).catch(next);
+});
+
 router.put('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 	User.findById(req.payload.id).then(async (user: IUserModel) => {
-		Session.findOne({ user: req.payload.id }).sort({ updatedAt: -1 }).then(async (session: ISessionModel) => {
-			await session.update(session);
+		Session.findOne({ user: req.payload.id }).sort({ lastAlive: -1 }).then(async (session: ISessionModel) => {
+			session.lastAlive = Date.now();
+			session.save();
+			return res.json({ session });
+		}).catch(next);
+	});
+});
+
+router.delete('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
+	User.findById(req.payload.id).then(async (user: IUserModel) => {
+		Session.findOne({ user: user._id }).sort({ lastAlive: -1 }).limit(1).then(async (session: ISessionModel) => {
+			session.statut = 0;
+			await session.save();
 			return res.json({ session });
 		}).catch(next);
 	});
