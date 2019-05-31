@@ -13,7 +13,7 @@ import { CountdownComponent } from 'ngx-countdown';
 export class HomeComponent implements OnInit {
 
   public start: boolean;
-  public isAlertPending: boolean = false;
+  public isAlertPending = false;
   public user: User;
   public usersNeedHelp: any[];
   @ViewChild('counterIsAlive') counterIsAlive: CountdownComponent;
