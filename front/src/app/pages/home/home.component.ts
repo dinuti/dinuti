@@ -15,9 +15,21 @@ export class HomeComponent implements OnInit {
   public start: boolean;
   public user: User;
   public usersNeedHelp: any[];
+
+  // Timer
+  private time = 300;
+  private array = Array.from({length: this.time - 1}, (x, i) => i + 1);
+  public config: any = {
+    leftTime: this.time,
+    notify: this.array
+  };
+  public color = 'green';
+
   @ViewChild(CountdownComponent) counter: CountdownComponent;
 
-  constructor(private socket: Socket, private auth: AuthService, private service: ServiceService) { }
+
+  constructor(private socket: Socket, private auth: AuthService, private service: ServiceService) {
+  }
 
   ngOnInit() {
     this.auth.checkAuthentication().then((user: User) => {
@@ -49,6 +61,7 @@ export class HomeComponent implements OnInit {
       this.counter.restart();
     }).catch(next => console.log(next));
   }
+
   stopSession() {
     this.service.closeSession().then(res => {
       console.log(res);
@@ -56,5 +69,18 @@ export class HomeComponent implements OnInit {
     }).catch(err => {
       console.log(err);
     });
+  }
+
+  notify(ev: any) {
+    // ev.left is in ms and this.time is in sec
+    const percent = ev.left / (this.time * 10);
+    this.color = this.hsl_col_perc(percent);
+  }
+
+  hsl_col_perc(percent: number) {
+    const red = 0;
+    const green = 120;
+    const color = (((green - red) * percent) / 100) + red;
+    return 'hsl(' + color + ', 100%, 50%)';
   }
 }
