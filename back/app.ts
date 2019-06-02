@@ -26,6 +26,9 @@ const agenda = new Agenda({ db: { address: dbUri, collection: 'agendaJobs' } });
 agenda.define('logUser', (job, done) => {
 	const date = moment().subtract(5, 'minutes');
 	Session.find({ statut: 1, lastAlive: { $lte: date } }).populate('user').then((res: any[]) => {
+		if (res.length) {
+			log('Alert!!! ');
+		}
 		io.emit('message', { type: 'alert', users: res });
 	});
 	done();
