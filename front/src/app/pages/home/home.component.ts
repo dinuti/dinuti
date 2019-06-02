@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   // Timer
   private time = 300;
-  private array = Array.from({length: 300 - 1}, (x, i) => i + 1);
+  private array = Array.from({length: this.time - 1}, (x, i) => i + 1);
   public config: any = {
     leftTime: this.time,
     notify: this.array
@@ -72,6 +72,7 @@ export class HomeComponent implements OnInit {
   }
 
   notify(ev: any) {
+    // ev.left is in ms and this.time is in sec
     const percent = ev.left / (this.time * 10);
     this.color = this.hsl_col_perc(percent);
   }
@@ -79,9 +80,7 @@ export class HomeComponent implements OnInit {
   hsl_col_perc(percent: number) {
     const red = 0;
     const green = 120;
-    const a = percent / 100;
-    const b = (green - red) * a;
-    const c = b + red;
-    return 'hsl(' + c + ', 100%, 50%)';
+    const color = (((green - red) * percent) / 100) + red;
+    return 'hsl(' + color + ', 100%, 50%)';
   }
 }
