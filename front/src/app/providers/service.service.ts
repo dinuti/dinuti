@@ -30,7 +30,7 @@ export class ServiceService {
   }
 
   async sendAlert(json: any) {
-    return this.general.post(`${this.baseUrl}/alert`, { session: json });
+    return this.general.put(`${this.baseUrl}/alert`, { session: json });
   }
 
 }
