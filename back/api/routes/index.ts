@@ -4,7 +4,7 @@ import { UserRoutes } from './user-routes';
 import { ProfilesRoutes } from './profiles-routes';
 import { LocationRoutes } from './location-routes';
 import { SessionRoutes } from './session-routes';
-import {AlertRoutes} from './alert-route';
+import { AlertRoutes } from './alert-route';
 const router: Router = Router();
 
 router.use('/user', UserRoutes);
