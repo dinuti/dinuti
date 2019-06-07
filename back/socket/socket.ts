@@ -1,12 +1,10 @@
-import { start } from "repl";
-
 export class Socket {
 	private io: any;
 	constructor(app: any) {
 		const http = require('http').Server(app);
 		this.io = require('socket.io')(http);
 		http.listen(4000);
-		start();
+		this.start();
 	}
 
 	getIo() {
