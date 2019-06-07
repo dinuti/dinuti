@@ -1,8 +1,8 @@
 import { Session, ISessionModel } from '../api/models/session-model';
-import * as moment from 'moment';
 import { Mail } from '../mail/mail';
 
 export class Cron {
+	moment = require('moment');
 	agenda: any;
 	io: any;
 	mail: Mail = new Mail();
@@ -15,7 +15,7 @@ export class Cron {
 
 	private define(): void {
 		this.agenda.define('logUser', (job, done) => {
-			const date = moment().subtract(5, 'minutes');
+			const date = this.moment().subtract(5, 'minutes');
 			Session.find({ statut: { $in: [1, 2] }, lastAlive: { $lte: date } })
 			.populate('user').then((res: any[]) => {
 				if (res.length) {
