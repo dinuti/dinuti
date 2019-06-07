@@ -1,4 +1,4 @@
-import { Session } from '../api/models/session-model';
+import { Session, ISessionModel } from '../api/models/session-model';
 import * as moment from 'moment';
 import { Mail } from '../mail/mail';
 
@@ -16,10 +16,11 @@ export class Cron {
 	private define(): void {
 		this.agenda.define('logUser', (job, done) => {
 			const date = moment().subtract(5, 'minutes');
-			Session.find({ statut: 1, lastAlive: { $lte: date } }).populate('user').then((res: any[]) => {
+			Session.find({ statut: { $in: [1, 2] }, lastAlive: { $lte: date } })
+			.populate('user').then((res: any[]) => {
 				if (res.length) {
 					this.log('Alert!!! ');
-					this.mail.sendMail();
+					this.modifyStatue(res);
 				}
 				this.io.emit('message', { type: 'alert', users: res });
 			});
@@ -36,5 +37,17 @@ export class Cron {
 
 	private log(obj: any): void {
 		console.log('\x1b[42m%s\x1b[0m', obj);
+	}
+
+	private modifyStatue(sessions: any[]) {
+		sessions.forEach((session: any) => {
+			Session.findOne({ user: session.user._id, statut: 1 }).then(async (session: ISessionModel) => {
+				if (session) {
+					this.mail.sendMail();
+					session.statut = 2;
+					session.save();
+				}
+			});
+		});
 	}
 }

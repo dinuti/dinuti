@@ -59,6 +59,7 @@ router.put('/', authentication.required, (req: JWTRequest, res: Response, next: 
 	User.findById(req.payload.id).then(async (user: IUserModel) => {
 		Session.findOne({ user: req.payload.id }).sort({ lastAlive: -1 }).then(async (session: ISessionModel) => {
 			session.lastAlive = Date.now();
+			session.statut = 1;
 			session.save();
 			return res.json({ session });
 		}).catch(next);

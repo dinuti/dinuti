@@ -1,6 +1,6 @@
 export const env = {
 	// Timer
-	timeMinutes: 5,
+	timeMinutes: 2,
 	timeSecond: this.timeMinutes * 60,
 
 	// Port
@@ -8,10 +8,9 @@ export const env = {
 	socketPort: 4000,
 
 	// Mail
-	adminMail: 'admin@dinuti.fr, admin2@dinuti.fr, admin3@dinuti.fr',
 	mail: {
 		from: '"Admin" 👻 <admin@dinuti.com>', // sender address
-		to: this.adminMail, // list of receivers
+		to: 'admin@dinuti.fr, admin2@dinuti.fr, admin3@dinuti.fr', // list of receivers
 		subject: 'Alert ✔', // Subject line
 		text: 'Alert?', // plain text body
 		html: '<b>Alert</b>' // html body
@@ -22,8 +21,8 @@ export const env = {
 		host: 'smtp.ethereal.email',
 		port: 587,
 		auth: {
-			user: 'johnathan87@ethereal.email',
-			pass: 'CE2fmd1EvFk4r1G3z9'
+			user: 'isabelle.kshlerin31@ethereal.email',
+			pass: 'HGnZZV2sDDdAu42ZSG'
 		}
 	}
 };
