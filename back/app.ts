@@ -11,7 +11,7 @@ import * as cors from 'cors';
 import { Socket } from './socket/socket';
 import { Cron } from './agenda/agenda';
 
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 // start API
 const dbUri: string = process.argv[2] ? process.argv[2] : '';
 const app: Application = express();
