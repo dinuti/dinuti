@@ -8,10 +8,10 @@ import { loadErrorHandlers } from './api/utilities/error-handling';
 import './api/utilities/passport';
 import * as session from 'express-session';
 import * as cors from 'cors';
-import * as bodyParser from 'body-parser';
 import { Socket } from './socket/socket';
 import { Cron } from './agenda/agenda';
 
+const bodyParser = require('body-parser')
 // start API
 const dbUri: string = process.argv[2] ? process.argv[2] : '';
 const app: Application = express();

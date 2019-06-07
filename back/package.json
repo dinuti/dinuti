@@ -27,7 +27,6 @@
   "dependencies": {
     "@types/agenda": "^2.0.4",
     "@types/cors": "^2.8.5",
-    "@types/nodemailer": "^6.2.0",
     "@types/socket.io": "^2.1.2",
     "agenda": "^2.0.2",
     "bluebird": "^3.5.0",
