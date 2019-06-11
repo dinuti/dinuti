@@ -1,11 +1,12 @@
 import { Router, NextFunction, Response } from 'express';
 import { authentication } from '../utilities/authentication';
 import { JWTRequest } from '../interfaces/requests-interface';
-import { ILocationModel, Location } from '../models/location-model';
 import { User, IUserModel } from '../models/user-model';
 import { Session, ISessionModel } from '../models/session-model';
+import { Mail } from '../../mail/mail';
 
 const router: Router = Router();
+const mail: Mail = new Mail();
 
 /**
 * @api {put} /alert/
@@ -21,6 +22,7 @@ router.put('/', authentication.required, (req: JWTRequest, res: Response, next: 
 			session.statut = 2;
 			session.save();
 			console.log(' We send an alert ');
+			mail.sendMail();
 			return res.json({ session });
 		}).catch(next);
 	});

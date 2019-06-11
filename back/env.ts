@@ -24,8 +24,8 @@ export const env = {
 		host: 'smtp.ethereal.email',
 		port: 587,
 		auth: {
-			user: 'isabelle.kshlerin31@ethereal.email',
-			pass: 'HGnZZV2sDDdAu42ZSG'
+			user: 'berenice.will@ethereal.email',
+			pass: 'Cu9Vbwu59tq5zya3mY'
 		}
 	}
 };
