@@ -7,9 +7,7 @@ import * as Bluebird from 'bluebird';
 
 export function connectToMongoDB(dbUri: string) {
 
-	mongoose.connect(dbUri, {
-		useMongoClient: true
-	});
+	mongoose.connect(dbUri);
 
 	mongoose.set('debug', true);
 

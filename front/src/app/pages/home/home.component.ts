@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/providers/auth.service';
 import { User } from 'src/app/model/user';
 import { ServiceService } from 'src/app/providers/service.service';
 import { CountdownComponent } from 'ngx-countdown';
+import { environment } from 'src/app/environment/environment';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('counterPendingAlert') counterPendingAlert: CountdownComponent;
 
   // Timer
-  private time = 300;
+  private time = environment.timerSecond;
   private array = Array.from({length: this.time - 1}, (x, i) => i + 1);
   public config: any = {
     leftTime: this.time,

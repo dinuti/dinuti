@@ -3,6 +3,9 @@ export const env = {
 	timeMinutes: 2,
 	timeSecond: this.timeMinutes * 60,
 
+	// Cron
+	every: '10 seconds',
+
 	// Port
 	apiPort: 3000,
 	socketPort: 4000,
