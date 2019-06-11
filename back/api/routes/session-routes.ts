@@ -42,7 +42,7 @@ router.post('/', authentication.required, (req: JWTRequest, res: Response, next:
 */
 router.get('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 	User.findById(req.payload.id).then(async (user: IUserModel) => {
-		Session.findOne({ user: user._id }).sort({ lastAlive: -1 }).limit(1).then(async (session: ISessionModel) => {
+		Session.findOne({ user: user._id }).sort({ lastAlive: -1 }).populate('location').limit(1).then(async (session: ISessionModel) => {
 			return res.json({ session });
 		}).catch(next);
 	}).catch(next);

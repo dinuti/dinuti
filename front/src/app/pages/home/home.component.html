@@ -1,55 +1,86 @@
-<div class="container" *ngIf="user && start">
-    <mat-card class="card">
-        <button mat-raised-button color="warn" *ngIf="!isAlertPending" (click)="startAlertCountdown()">
-            Send alert
-        </button>
-        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column" *ngIf="isAlertPending">
-            <h3>An alert will be sent in:</h3>
-        </mat-card-title>
-        <mat-card-content *ngIf="isAlertPending">
-            <countdown #counterPendingAlert [config]="{leftTime: 10}"
-                (finished)="sendAlert()">
-                $!m!:$!s!
-            </countdown>
-            <button mat-raised-button color="accent" (click)="cancelAlert()">
-                Cancel
-            </button>
-        </mat-card-content>
-    </mat-card>
-</div>
-<div class="container" *ngIf="user && start">
-    <mat-card class="card">
-        <button mat-raised-button color="primary" (click)="stopSession()">
-            Stop session
-        </button>
-        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-            <h3>How are you?</h3>
-        </mat-card-title>
-        <mat-card-content [style.backgroundColor]="color">
-            <countdown  #counterIsAlive [config]="config" (event)="notify($event)">
-                $!m!:$!s!
-            </countdown>
-            <button mat-raised-button color="primary" (click)="updateSession()">
-                I'm alive
-            </button>
-        </mat-card-content>
-    </mat-card>
-</div>
-<div class="container" *ngIf="user && start">
-    <mat-card class="card" >
-        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-            <h3>Someone need help?</h3>
-        </mat-card-title>
-        <mat-card-content>
-            <div *ngFor="let user of usersNeedHelp">
-                <p>{{user.user.username}}</p>
-                <p>{{user.user.email}}</p>
-                <p>{{user.mobile}}</p>
-                <p>{{user.phone}}</p>
-                <hr/>
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened *ngIf="user">
+        <p class="username">
+            <mat-icon aria-hidden="false">account_circle</mat-icon>
+            {{user.username}}
+        </p>
+        <hr/>
+        <div class="session-info" *ngIf="session">
+            <div class="title">
+                <mat-icon aria-hidden="false">location_on</mat-icon>
+                Location:
+                <p>{{session.location.desc}}</p>
             </div>
-        </mat-card-content>
-    </mat-card>
-</div>
-
-<app-form-session *ngIf="user && !start" (startSession)="startSession()"></app-form-session>
+            <div class="title">
+                <mat-icon aria-hidden="false">call</mat-icon>
+                Phone number:
+                <p>{{session.phone}}</p>
+            </div>
+            <div class="title">
+                <mat-icon aria-hidden="false">mobile_friendly</mat-icon>
+                Mobile number:
+                <p>{{session.mobile}}</p>
+            </div>
+        </div>
+        <button mat-raised-button color="primary" (click)="stopSession()">
+                Stop session
+            </button>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="container" *ngIf="user && start">
+            <mat-card class="card">
+                <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                    <h3>How are you?</h3>
+                </mat-card-title>
+                <mat-card-content [style.backgroundColor]="color">
+                    <countdown  #counterIsAlive [config]="config" (event)="notify($event)">
+                        $!m!:$!s!
+                    </countdown>
+                    <button mat-raised-button color="primary" (click)="updateSession()">
+                        I'm alive
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="container col-6" *ngIf="user && start">
+            <mat-card class="card">
+                <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                    <h3>Need help?</h3>
+                </mat-card-title>
+                <button mat-raised-button color="warn" *ngIf="!isAlertPending" (click)="startAlertCountdown()">
+                    Send alert
+                </button>
+                <h3 *ngIf="isAlertPending">An alert will be sent in:</h3>
+                <mat-card-content *ngIf="isAlertPending">
+                    <countdown #counterPendingAlert [config]="{leftTime: 10}"
+                        (finished)="sendAlert()">
+                        $!m!:$!s!
+                    </countdown>
+                    <button mat-raised-button color="accent" (click)="cancelAlert()">
+                        Cancel
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="container col-6" *ngIf="user && start">
+            <mat-card class="card" >
+                <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                    <h3>Someone need help?</h3>
+                </mat-card-title>
+                <mat-card-content>
+                    <div *ngIf="!usersNeedHelp">
+                        No alerts
+                    </div>
+                    <div *ngFor="let user of usersNeedHelp">
+                        <p>{{user.user.username}}</p>
+                        <p>{{user.user.email}}</p>
+                        <p>{{user.mobile}}</p>
+                        <p>{{user.phone}}</p>
+                        <hr/>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>    
+        <app-form-session *ngIf="user && !start" (startSession)="getSession()"></app-form-session>    
+    </mat-drawer-content>
+</mat-drawer-container>

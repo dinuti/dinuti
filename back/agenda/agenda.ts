@@ -17,7 +17,7 @@ export class Cron {
 	private define(): void {
 		this.agenda.define('logUser', (job, done) => {
 			const date = this.moment().subtract(env.timeMinutes, 'minutes');
-			Session.find({ statut: { $in: [1, 2] }, lastAlive: { $lte: date } })
+			Session.find({ statut: { $in: [1, 2] }, $or: [{ lastAlive: { $lte: date } }, { statut: 2 }] })
 			.populate('user').then((res: any[]) => {
 				if (res.length) {
 					this.log('Alert!!! ');
