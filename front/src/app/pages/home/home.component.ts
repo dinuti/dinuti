@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   public isAlertPending = false;
   public user: User;
   public usersNeedHelp: any[];
+  public session: any;
 
   @ViewChild('counterIsAlive') counterIsAlive: CountdownComponent;
   @ViewChild('counterPendingAlert') counterPendingAlert: CountdownComponent;
@@ -35,15 +36,20 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.checkAuthentication().then((user: User) => {
-      this.user = user;
-      this.service.getSession().then((res: any) => {
-        this.start = res.session && res.session.statut;
-        if (this.start) {
-          this.startSession();
-          this.updateSession();
-        }
-      });
+    this.auth.checkAuthentication().then((res: any) => {
+      this.user = res.user;
+      this.getSession();
+    });
+  }
+
+  getSession() {
+    this.service.getSession().then((res2: any) => {
+      this.start = res2.session && res2.session.statut;
+      if (this.start) {
+        this.session = res2.session;
+        this.startSession();
+        this.updateSession();
+      }
     });
   }
 

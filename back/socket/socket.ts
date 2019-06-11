@@ -15,9 +15,11 @@ export class Socket {
 		this.io.on('connection', (socket: any) => {
 			console.log(`${Object.keys(this.io.sockets.connected).length} user connected`);
 			socket.on('auth', (res: any) => {
-				console.log(`${res.user.email} est connecté`);
-				socket.sessionid = res.user.email;
-				this.io.emit('message', { type: 'new-message', text: res });
+				if (res.user && res.user.email) {
+					console.log(`${res.user.email} est connecté`);
+					socket.sessionid = res.user.email;
+					this.io.emit('message', { type: 'new-message', text: res });
+				}
 			});
 			socket.on('disconnect', () => console.log(`closed connection ${socket.sessionid}`));
 		});

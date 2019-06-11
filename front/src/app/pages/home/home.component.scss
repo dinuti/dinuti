@@ -5,3 +5,46 @@ mat-card-content {
         font-size: 6rem;
     }
 }
+mat-drawer-content {
+    overflow: hidden;
+    min-height: 92vh;
+}
+mat-drawer {
+    width: 300px;
+    box-shadow: 0px 0px 10px #0c0c0c;
+    button {
+        width: 100%;
+    }
+}
+
+.username {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 21px;
+}
+hr {
+    margin: 15px;
+    background-color: rgba(0,0,0,0.3);
+}
+.mat-icon {
+    position: relative;
+    top: 5px;
+    left: -5px;
+}
+.session-info {
+    margin: 15px;
+}
+.title {
+    p {
+        text-align: center;
+    }
+}
+
+.col-6 {
+    width: 50%;
+    margin: -15px;
+    padding: 15px;
+    mat-card {
+        margin: 15px;
+    }
+}
