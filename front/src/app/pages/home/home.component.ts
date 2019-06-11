@@ -13,8 +13,12 @@ import { CountdownComponent } from 'ngx-countdown';
 export class HomeComponent implements OnInit {
 
   public start: boolean;
+  public isAlertPending = false;
   public user: User;
   public usersNeedHelp: any[];
+
+  @ViewChild('counterIsAlive') counterIsAlive: CountdownComponent;
+  @ViewChild('counterPendingAlert') counterPendingAlert: CountdownComponent;
 
   // Timer
   private time = 300;
@@ -24,8 +28,6 @@ export class HomeComponent implements OnInit {
     notify: this.array
   };
   public color = 'green';
-
-  @ViewChild(CountdownComponent) counter: CountdownComponent;
 
 
   constructor(private socket: Socket, private auth: AuthService, private service: ServiceService) {
@@ -58,7 +60,7 @@ export class HomeComponent implements OnInit {
 
   updateSession() {
     this.service.updateSession({}).then((res) => {
-      this.counter.restart();
+      this.counterIsAlive.restart();
     }).catch(next => console.log(next));
   }
 
@@ -69,6 +71,20 @@ export class HomeComponent implements OnInit {
     }).catch(err => {
       console.log(err);
     });
+  }
+
+  startAlertCountdown() {
+    this.isAlertPending = true;
+  }
+
+  sendAlert() {
+    this.service.sendAlert({}).then((res) => {
+      this.isAlertPending = false;
+    }).catch(next => console.log(next));
+  }
+
+  cancelAlert() {
+    this.isAlertPending = false;
   }
 
   notify(ev: any) {
