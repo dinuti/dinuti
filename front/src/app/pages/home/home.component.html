@@ -22,7 +22,7 @@
                 <p>{{session.mobile}}</p>
             </div>
         </div>
-        <button mat-raised-button color="primary" (click)="stopSession()">
+        <button mat-raised-button color="primary" (click)="stopSession()" *ngIf="session">
                 Stop session
             </button>
     </mat-drawer>
@@ -68,7 +68,7 @@
                     <h3>Someone need help?</h3>
                 </mat-card-title>
                 <mat-card-content>
-                    <div *ngIf="!usersNeedHelp">
+                    <div *ngIf="!usersNeedHelp || (usersNeedHelp && !usersNeedHelp.length)">
                         No alerts
                     </div>
                     <div *ngFor="let user of usersNeedHelp">
