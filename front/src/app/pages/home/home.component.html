@@ -22,7 +22,7 @@
                 <p>{{session.mobile}}</p>
             </div>
         </div>
-        <button mat-raised-button color="primary" (click)="stopSession()" *ngIf="session">
+        <button mat-raised-button color="primary" (click)="stopSession()" *ngIf="session && start">
                 Stop session
             </button>
     </mat-drawer>
