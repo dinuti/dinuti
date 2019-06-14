@@ -42,9 +42,12 @@ export class Cron {
 
 	private modifyStatue(sessions: any[]) {
 		sessions.forEach((session: any) => {
-			Session.findOne({ user: session.user._id, statut: 1 }).then(async (session: ISessionModel) => {
+			Session.findOne({ user: session.user._id, statut: 1 })
+			.populate('user')
+			.populate('location')
+			.then(async (session: ISessionModel) => {
 				if (session) {
-					this.mail.sendMail();
+					this.mail.sendMail(session);
 					session.statut = 2;
 					session.save();
 				}

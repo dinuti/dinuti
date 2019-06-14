@@ -18,11 +18,15 @@ const mail: Mail = new Mail();
 */
 router.put('/', authentication.required, (req: JWTRequest, res: Response, next: NextFunction) => {
 	User.findById(req.payload.id).then(async (user: IUserModel) => {
-		Session.findOne({ user: req.payload.id }).sort({ lastAlive: -1 }).then(async (session: ISessionModel) => {
+		Session.findOne({ user: req.payload.id })
+		.sort({ lastAlive: -1 })
+		.populate('user')
+		.populate('location')
+		.then(async (session: ISessionModel) => {
 			session.statut = 2;
 			session.save();
 			console.log(' We send an alert ');
-			mail.sendMail();
+			mail.sendMail(session);
 			return res.json({ session });
 		}).catch(next);
 	});
